@@ -4,40 +4,64 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public Rigidbody2D mRigidBody;
-    public float maxSpeed = 4f;
+    new Rigidbody2D rigidbody2D;
+    new Transform transform;
 
-    public GameObject item;
-    // Start is called before the first frame update
-    private void Awake()
+    public float m_fSpeed;
+    void Awake()
     {
-        
+        rigidbody2D = this.GetComponent<Rigidbody2D>();
+        transform = this.GetComponent<Transform>();
+        m_fSpeed = 500f;
     }
+
     void Start()
     {
-        
     }
-
-    // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        mRigidBody.AddForce(Vector2.right*x,ForceMode2D.Impulse);
-        if(mRigidBody.velocity.x>maxSpeed)
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            mRigidBody.velocity = new Vector2(maxSpeed, mRigidBody.velocity.y);
+            if (rigidbody2D.velocity.x > -5f)
+            {
+                rigidbody2D.AddForce(new Vector2(-1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
+            }
         }
-        else if(mRigidBody.velocity.x<maxSpeed*(-1))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
-            mRigidBody.velocity = new Vector2(maxSpeed*(-1),mRigidBody.velocity.y);
+            if (rigidbody2D.velocity.x < 5f)
+            {
+                rigidbody2D.AddForce(new Vector2(1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
+            }
         }
-    
+
+        if (rigidbody2D.velocity.x > 0f)
+        {
+            rigidbody2D.AddForce(new Vector2(-0.5f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+        }
+        else if (rigidbody2D.velocity.x < 0f)
+        {
+            rigidbody2D.AddForce(new Vector2(0.5f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+        }
+
+        if(rigidbody2D.velocity.y < 0f)
+        {
+            rigidbody2D.AddForce(new Vector2(0f, -5f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+        }
+        else
+        {
+            rigidbody2D.AddForce(new Vector2(0f, -5f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+        }
     }
 
-    
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if(collision.gameObject.CompareTag("Normal Block"))
+        {
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
+            //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
+            rigidbody2D.AddForce(new Vector2(0f, 900f), ForceMode2D.Force);
+        }
     }
 
 }
