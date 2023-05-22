@@ -386,6 +386,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Star (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7875362482060243267, guid: 2e01e736818004f42a959591eca951a6, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7875362482060243269, guid: 2e01e736818004f42a959591eca951a6, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -442,6 +446,10 @@ PrefabInstance:
     - target: {fileID: 7875362482060243265, guid: 2e01e736818004f42a959591eca951a6, type: 3}
       propertyPath: m_Name
       value: Star
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875362482060243267, guid: 2e01e736818004f42a959591eca951a6, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7875362482060243269, guid: 2e01e736818004f42a959591eca951a6, type: 3}
       propertyPath: m_RootOrder

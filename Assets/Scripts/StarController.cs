@@ -19,7 +19,7 @@ public class StarController : MonoBehaviour
         
     }
 
-    void OnCollisionEnter2D(Collision2D collsion)
+    void OnTriggerEnter2D(Collider2D collsion)
     {
         if(collsion.gameObject.CompareTag("Player"))
         {
