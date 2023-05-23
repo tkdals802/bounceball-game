@@ -8,10 +8,14 @@ public class Ball : MonoBehaviour
     new Transform transform;
 
     public float m_fSpeed;
+    public float normal_jump;
+    public float up_jump;
     void Awake()
     {
         rigidbody2D = this.GetComponent<Rigidbody2D>();
         transform = this.GetComponent<Transform>();
+        normal_jump = 900f;
+        up_jump = 1500f;
         m_fSpeed = 500f;
     }
 
@@ -60,7 +64,13 @@ public class Ball : MonoBehaviour
         {
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
             //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
-            rigidbody2D.AddForce(new Vector2(0f, 900f), ForceMode2D.Force);
+            rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
+        }
+        if(collision.gameObject.CompareTag("UpBlock"))
+        {
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
+            //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
+            rigidbody2D.AddForce(new Vector2(0f, up_jump), ForceMode2D.Force);
         }
     }
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Normal Block
   - Star
+  - UpBlock
   layers:
   - Default
   - TransparentFX
