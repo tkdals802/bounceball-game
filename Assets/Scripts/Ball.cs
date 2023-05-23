@@ -10,6 +10,7 @@ public class Ball : MonoBehaviour
     public float m_fSpeed;
     public float normal_jump;
     public float up_jump;
+    public GameObject start;
     void Awake()
     {
         rigidbody2D = this.GetComponent<Rigidbody2D>();
@@ -24,6 +25,10 @@ public class Ball : MonoBehaviour
     }
     void Update()
     {
+        if(transform.position.y<-30)
+        {
+            gameObject.transform.position = start.transform.position;
+        }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             if (rigidbody2D.velocity.x > -5f)
@@ -71,6 +76,10 @@ public class Ball : MonoBehaviour
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
             //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
             rigidbody2D.AddForce(new Vector2(0f, up_jump), ForceMode2D.Force);
+        }
+        if(collision.gameObject.CompareTag("Obstacle"))
+        {
+            gameObject.transform.position = start.transform.position;
         }
     }
 
