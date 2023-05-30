@@ -9,6 +9,7 @@ TagManager:
   - UpBlock
   - Obstacle
   - JumpItem
+  - SideBlock
   layers:
   - Default
   - TransparentFX

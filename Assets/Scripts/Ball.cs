@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,12 +16,16 @@ public class Ball : MonoBehaviour
     public float up_jump; //상승블럭 혹은 점프 아이템을 사용했을때 높이
     public string Item; //무슨 아이템을 먹었는지 식별
     public bool hasItem; //아이템을 끼고있으면 True 아니면 False
-    public GameObject start;
+    public GameObject start;//시작포인트
+    public GameObject whiteHole;
+    
+
     void Awake()
     {
         rigidbody2D = this.GetComponent<Rigidbody2D>();
         transform = this.GetComponent<Transform>();
         sr = this.GetComponent<SpriteRenderer>();
+        whiteHole = GameObject.Find("whiteHole");
         normal_jump = 900f;
         up_jump = 1500f;
         m_fSpeed = 500f;
@@ -61,7 +66,7 @@ public class Ball : MonoBehaviour
             }
         }
 
-        if (rigidbody2D.velocity.x > 0f)
+        if (rigidbody2D.velocity.x > 0f)//오른쪽 이동
         {
             rigidbody2D.AddForce(new Vector2(-0.5f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
         }
@@ -92,7 +97,10 @@ public class Ball : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Normal Block"))
+        string collideName = collision.gameObject.name;
+        Debug.Log("화이트홀로" + collideName);
+
+        if (collision.gameObject.CompareTag("Normal Block"))
         {
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
             //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
@@ -108,7 +116,17 @@ public class Ball : MonoBehaviour
         {
             gameObject.transform.position = start.transform.position;
         }
-        
+        if (collision.gameObject.CompareTag("SideBlock"))
+        {
+            rigidbody2D.AddForce(new Vector2(up_jump, 0f));
+            rigidbody2D.gravityScale = 0;
+        }
+        if(collideName=="blackHole")
+        { 
+            gameObject.transform.position = whiteHole.transform.position;
+            
+        }
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
