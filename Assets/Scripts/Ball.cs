@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
@@ -16,13 +18,16 @@ public class Ball : MonoBehaviour
     public string Item; //무슨 아이템을 먹었는지 식별
     public bool hasItem; //아이템을 끼고있으면 True 아니면 False
     public GameObject start;
-    public GameObject whiteHole;
+    public GameObject whiteHole1;
+    public GameObject whiteHole2;
     void Awake()
     {
+        
         rigidbody2D = this.GetComponent<Rigidbody2D>();
         transform = this.GetComponent<Transform>();
         sr = this.GetComponent<SpriteRenderer>();
-        whiteHole = GameObject.Find("whiteHole");
+        whiteHole1 = GameObject.Find("whiteHole1");
+        whiteHole2 = GameObject.Find("whiteHole2");
 
         normal_jump = 900f;
         up_jump = 1500f;
@@ -37,7 +42,8 @@ public class Ball : MonoBehaviour
     {
         if(transform.position.y<-30) //떨어진경우 다시 원점으로 복귀
         {
-            gameObject.transform.position = start.transform.position;
+            //gameObject.transform.position = start.transform.position;
+            UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.name);//Scene reload
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -143,9 +149,17 @@ public class Ball : MonoBehaviour
         {
             gameObject.transform.position = start.transform.position;
         }
-        if (collision.gameObject.CompareTag("blackHole"))
+        if (collision.gameObject.CompareTag("blackHole1"))
         {
-            gameObject.transform.position = whiteHole.transform.position;
+            gameObject.transform.position = whiteHole1.transform.position;
+        }
+        if (collision.gameObject.CompareTag("blackHole2"))
+        {
+            gameObject.transform.position = whiteHole2.transform.position;
+        }
+        if (collision.gameObject.CompareTag("BreakBall"))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.name);//Scene reload
         }
 
 
