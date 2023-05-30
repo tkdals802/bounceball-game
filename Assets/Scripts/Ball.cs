@@ -91,6 +91,19 @@ public class Ball : MonoBehaviour
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
             rigidbody2D.AddForce(new Vector2(0f, up_jump), ForceMode2D.Force);
         }
+        if (Item == "DashItem")
+        {
+            if (rigidbody2D.velocity.x > 0)
+            {
+                rigidbody2D.AddForce(new Vector2(up_jump, 0f), ForceMode2D.Force);
+            }
+            else
+            {
+                rigidbody2D.AddForce(new Vector2(-1*up_jump, 0f), ForceMode2D.Force);
+            }
+            
+            
+        }
 
     }
     void OnCollisionEnter2D(Collision2D collision)
@@ -126,6 +139,14 @@ public class Ball : MonoBehaviour
             Item = "JumpItem";
             hasItem = true;
             sr.material.color = Color.black;
+            other.gameObject.SetActive(false);
+        }
+        if (other.CompareTag("DashItem"))
+        {
+            Color brown = new Color(150.0f,75.0f,0.0f,1.0f);
+            Item = "DashItem";
+            hasItem= true;
+            sr.material.color = brown;
             other.gameObject.SetActive(false);
         }
         if(other.CompareTag("Star"))
