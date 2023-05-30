@@ -16,11 +16,14 @@ public class Ball : MonoBehaviour
     public string Item; //무슨 아이템을 먹었는지 식별
     public bool hasItem; //아이템을 끼고있으면 True 아니면 False
     public GameObject start;
+    public GameObject whiteHole;
     void Awake()
     {
         rigidbody2D = this.GetComponent<Rigidbody2D>();
         transform = this.GetComponent<Transform>();
         sr = this.GetComponent<SpriteRenderer>();
+        whiteHole = GameObject.Find("whiteHole");
+
         normal_jump = 900f;
         up_jump = 1500f;
         m_fSpeed = 500f;
@@ -108,7 +111,12 @@ public class Ball : MonoBehaviour
         {
             gameObject.transform.position = start.transform.position;
         }
-        
+        if (collision.gameObject.CompareTag("blackHole"))
+        {
+            gameObject.transform.position = whiteHole.transform.position;
+        }
+
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
