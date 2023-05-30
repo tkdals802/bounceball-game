@@ -9,7 +9,11 @@ TagManager:
   - UpBlock
   - Obstacle
   - JumpItem
+<<<<<<< Updated upstream
   - SideBlock
+=======
+  - blackHole
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX

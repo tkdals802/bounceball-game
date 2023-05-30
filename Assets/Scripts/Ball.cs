@@ -16,9 +16,10 @@ public class Ball : MonoBehaviour
     public float up_jump; //상승블럭 혹은 점프 아이템을 사용했을때 높이
     public string Item; //무슨 아이템을 먹었는지 식별
     public bool hasItem; //아이템을 끼고있으면 True 아니면 False
+
     public GameObject start;//시작포인트
     public GameObject whiteHole;
-    
+
 
     void Awake()
     {
@@ -116,15 +117,17 @@ public class Ball : MonoBehaviour
         {
             gameObject.transform.position = start.transform.position;
         }
+
         if (collision.gameObject.CompareTag("SideBlock"))
         {
             rigidbody2D.AddForce(new Vector2(up_jump, 0f));
             rigidbody2D.gravityScale = 0;
         }
-        if(collideName=="blackHole")
-        { 
+
+        if (collision.gameObject.CompareTag("blackHole"))
+        {
             gameObject.transform.position = whiteHole.transform.position;
-            
+
         }
 
     }
