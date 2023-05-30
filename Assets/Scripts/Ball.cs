@@ -125,7 +125,15 @@ public class Ball : MonoBehaviour
             //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
             rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
         }
-        if(collision.gameObject.CompareTag("UpBlock"))
+        if (collision.gameObject.CompareTag("Destroy"))
+        {
+            GameObject collideObject = collision.gameObject;
+            Destroy(collideObject);
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
+            //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
+            rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
+        }
+        if (collision.gameObject.CompareTag("UpBlock"))
         {
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
             //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
