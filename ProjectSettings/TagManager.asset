@@ -11,6 +11,7 @@ TagManager:
   - JumpItem
   - blackHole
   - DashItem
+  - WarpItem
   layers:
   - Default
   - TransparentFX

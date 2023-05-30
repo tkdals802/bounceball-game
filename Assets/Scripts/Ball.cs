@@ -101,8 +101,19 @@ public class Ball : MonoBehaviour
             {
                 rigidbody2D.AddForce(new Vector2(-1*up_jump, 0f), ForceMode2D.Force);
             }
-            
-            
+        }
+        if(Item == "WarpItem")
+        {
+            Vector2 px = gameObject.transform.localPosition;
+            if (rigidbody2D.velocity.x > 0)
+            {
+                px.x = px.x+3;
+            }
+            else
+            {
+                px.x = px.x - 3;   
+            }
+            gameObject.transform.localPosition = px;
         }
 
     }
@@ -134,10 +145,10 @@ public class Ball : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("JumpItem"))
+        hasItem = true;
+        if (other.CompareTag("JumpItem"))
         {
             Item = "JumpItem";
-            hasItem = true;
             sr.color = Color.black;
             other.gameObject.SetActive(false);
         }
@@ -145,11 +156,16 @@ public class Ball : MonoBehaviour
         {
             Color brown = new Color(0.68f, 0.29f,0.0f,1.0f);
             Item = "DashItem";
-            hasItem= true;
             sr.color = brown;
             other.gameObject.SetActive(false);
         }
-        else if(other.CompareTag("Star"))
+        if (other.CompareTag("WarpItem"))
+        {
+            Item = "WarpItem";
+            sr.color = Color.green;
+            other.gameObject.SetActive(false);
+        }
+        if(other.CompareTag("Star"))
         {
             lg.GetStar();
             other.gameObject.SetActive(false);  
