@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
@@ -18,17 +16,11 @@ public class Ball : MonoBehaviour
     public string Item; //무슨 아이템을 먹었는지 식별
     public bool hasItem; //아이템을 끼고있으면 True 아니면 False
     public GameObject start;
-    public GameObject whiteHole1;
-    public GameObject whiteHole2;
     void Awake()
     {
-        
         rigidbody2D = this.GetComponent<Rigidbody2D>();
         transform = this.GetComponent<Transform>();
         sr = this.GetComponent<SpriteRenderer>();
-        whiteHole1 = GameObject.Find("whiteHole1");
-        whiteHole2 = GameObject.Find("whiteHole2");
-
         normal_jump = 900f;
         up_jump = 1500f;
         m_fSpeed = 500f;
@@ -42,8 +34,7 @@ public class Ball : MonoBehaviour
     {
         if(transform.position.y<-30) //떨어진경우 다시 원점으로 복귀
         {
-            //gameObject.transform.position = start.transform.position;
-            UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.name);//Scene reload
+            gameObject.transform.position = start.transform.position;
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -65,7 +56,7 @@ public class Ball : MonoBehaviour
             if(hasItem)
             {
                 useItem();
-                sr.color = new Color(255f,255f,0,255f);
+                sr.material.color = new Color(255f,255f,0,255f);
                 hasItem = false;
             }
         }
@@ -97,30 +88,6 @@ public class Ball : MonoBehaviour
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
             rigidbody2D.AddForce(new Vector2(0f, up_jump), ForceMode2D.Force);
         }
-        if (Item == "DashItem")
-        {
-            if (rigidbody2D.velocity.x > 0)
-            {
-                rigidbody2D.AddForce(new Vector2(up_jump, 0f), ForceMode2D.Force);
-            }
-            else
-            {
-                rigidbody2D.AddForce(new Vector2(-1*up_jump, 0f), ForceMode2D.Force);
-            }
-        }
-        if(Item == "WarpItem")
-        {
-            Vector2 px = gameObject.transform.localPosition;
-            if (rigidbody2D.velocity.x > 0)
-            {
-                px.x = px.x+3;
-            }
-            else
-            {
-                px.x = px.x - 3;   
-            }
-            gameObject.transform.localPosition = px;
-        }
 
     }
     void OnCollisionEnter2D(Collision2D collision)
@@ -131,15 +98,7 @@ public class Ball : MonoBehaviour
             //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
             rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
         }
-        if (collision.gameObject.CompareTag("Destroy"))
-        {
-            GameObject collideObject = collision.gameObject;
-            Destroy(collideObject);
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
-            //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
-            rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
-        }
-        if (collision.gameObject.CompareTag("UpBlock"))
+        if(collision.gameObject.CompareTag("UpBlock"))
         {
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
             //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
@@ -147,44 +106,21 @@ public class Ball : MonoBehaviour
         }
         if(collision.gameObject.CompareTag("Obstacle"))
         {
-            gameObject.transform.position = start.transform.position;
-        }
-        if (collision.gameObject.CompareTag("blackHole1"))
-        {
-            gameObject.transform.position = whiteHole1.transform.position;
-        }
-        if (collision.gameObject.CompareTag("blackHole2"))
-        {
-            gameObject.transform.position = whiteHole2.transform.position;
-        }
-        if (collision.gameObject.CompareTag("BreakBall"))
-        {
             UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.name);//Scene reload
         }
-
-
+        if (collision.gameObject.CompareTag("BlackHole"))
+        {
+            gameObject.transform.position = collision.transform.Find("whiteHole1").gameObject.transform.position;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        hasItem = true;
-        if (other.CompareTag("JumpItem"))
+        if(other.CompareTag("JumpItem"))
         {
             Item = "JumpItem";
-            sr.color = Color.black;
-            other.gameObject.SetActive(false);
-        }
-        if(other.CompareTag("DashItem"))
-        {
-            Color brown = new Color(0.68f, 0.29f,0.0f,1.0f);
-            Item = "DashItem";
-            sr.color = brown;
-            other.gameObject.SetActive(false);
-        }
-        if (other.CompareTag("WarpItem"))
-        {
-            Item = "WarpItem";
-            sr.color = Color.green;
+            hasItem = true;
+            sr.material.color = Color.black;
             other.gameObject.SetActive(false);
         }
         if(other.CompareTag("Star"))

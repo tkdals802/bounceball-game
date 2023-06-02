@@ -9,9 +9,11 @@ TagManager:
   - UpBlock
   - Obstacle
   - JumpItem
-  - blackHole
   - DashItem
   - WarpItem
+  - BreakBall
+  - Destroy
+  - BlackHole
   layers:
   - Default
   - TransparentFX
