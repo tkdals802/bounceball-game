@@ -106,9 +106,12 @@ public class Ball : MonoBehaviour
         }
         if(collision.gameObject.CompareTag("Obstacle"))
         {
-            gameObject.transform.position = start.transform.position;
+            UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.name);//Scene reload
         }
-        
+        if (collision.gameObject.CompareTag("BlackHole"))
+        {
+            gameObject.transform.position = collision.transform.Find("whiteHole1").gameObject.transform.position;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
