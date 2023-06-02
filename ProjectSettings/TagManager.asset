@@ -9,14 +9,6 @@ TagManager:
   - UpBlock
   - Obstacle
   - JumpItem
-<<<<<<< Updated upstream
-=======
-  - blackHole
-  - DashItem
-  - WarpItem
-  - Destroy
-  - BlackHole
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
