@@ -34,7 +34,7 @@ public class Ball : MonoBehaviour
     {
         if(transform.position.y<-30) //떨어진경우 다시 원점으로 복귀
         {
-            gameObject.transform.position = start.transform.position;
+            UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.name);
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -88,12 +88,44 @@ public class Ball : MonoBehaviour
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
             rigidbody2D.AddForce(new Vector2(0f, up_jump), ForceMode2D.Force);
         }
+        if (Item == "DashItem")
+        {
+            if (rigidbody2D.velocity.x > 0)
+            {
+                rigidbody2D.AddForce(new Vector2(up_jump, 0f), ForceMode2D.Force);
+            }
+            else
+            {
+                rigidbody2D.AddForce(new Vector2(-1*up_jump, 0f), ForceMode2D.Force);
+            }
+        }
+        if(Item == "WarpItem")
+        {
+            Vector2 px = gameObject.transform.localPosition;
+            if (rigidbody2D.velocity.x > 0)
+            {
+                px.x = px.x+3;
+            }
+            else
+            {
+                px.x = px.x - 3;   
+            }
+            gameObject.transform.localPosition = px;
+        }
 
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Normal Block"))
         {
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
+            //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
+            rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
+        }
+        if (collision.gameObject.CompareTag("Destroy"))
+        {
+            GameObject collideObject = collision.gameObject;
+            Destroy(collideObject);
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
             //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
             rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
@@ -123,11 +155,27 @@ public class Ball : MonoBehaviour
             sr.material.color = Color.black;
             other.gameObject.SetActive(false);
         }
+        if(other.CompareTag("DashItem"))
+        {
+            Color brown = new Color(0.68f, 0.29f,0.0f,1.0f);
+            Item = "DashItem";
+            hasItem = true;
+            sr.color = brown;
+            other.gameObject.SetActive(false);
+        }
+        if (other.CompareTag("WarpItem"))
+        {
+            Item = "WarpItem";
+            hasItem = true;
+            sr.color = Color.green;
+            other.gameObject.SetActive(false);
+        }
         if(other.CompareTag("Star"))
         {
             lg.GetStar();
             other.gameObject.SetActive(false);  
         }
+        
     }
 
 }
