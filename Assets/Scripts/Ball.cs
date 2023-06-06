@@ -56,7 +56,7 @@ public class Ball : MonoBehaviour
             if(hasItem)
             {
                 useItem();
-                sr.material.color = new Color(255f,255f,0,255f);
+                sr.color = new Color(1.0f,1.0f,0,1.0f);
                 hasItem = false;
             }
         }
