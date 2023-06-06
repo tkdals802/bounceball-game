@@ -243,7 +243,6 @@ public class Ball : MonoBehaviour
             sr.color = new Color(1f,0f,1f,1f);
             other.gameObject.SetActive(false);
         }
-        if(other.CompareTag("Star"))
         if (other.CompareTag("CheckPoint"))
         {
             Item = "CheckPoint";
@@ -251,9 +250,6 @@ public class Ball : MonoBehaviour
             sr.color = Color.red;
             checkPoint = other.transform.position;
             other.gameObject.SetActive(false);
-            
-
-
         }
         if (other.CompareTag("Star"))
         {
