@@ -138,6 +138,8 @@ public class Ball : MonoBehaviour
                 rigidbody2D.gravityScale = 0f;
                 direction = "left";
                 fly = true;
+            }
+        }
         if (Item == "CheckPoint")
         {
             GameObject back = GameObject.Find("comeBack");
@@ -148,7 +150,6 @@ public class Ball : MonoBehaviour
 
 
 
-            }
         }
 
     }
