@@ -9,6 +9,8 @@ public class Ball : MonoBehaviour
     [SerializeField]
     private Logic lg;
     private SpriteRenderer sr;
+    private bool fly = false; //직진블록만나면 true 아니면 false
+    private string direction = "";// 오른쪽직진인지 왼쪽직진인지 
 
     public float m_fSpeed;
     public float normal_jump; //노말블럭에 닿았을때 점프력
@@ -32,12 +34,20 @@ public class Ball : MonoBehaviour
     }
     void Update()
     {
+        if(fly)
+        {
+            if(direction == "right")
+                rigidbody2D.velocity = new Vector2(10f,1f); 
+            else if(direction == "left")
+                rigidbody2D.velocity = new Vector2(-10f,1f);
+        }
         if(transform.position.y<-30) //떨어진경우 다시 원점으로 복귀
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.name);
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
+            rollBack();
             if (rigidbody2D.velocity.x > -5f)
             {
                 rigidbody2D.AddForce(new Vector2(-1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
@@ -45,6 +55,7 @@ public class Ball : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
+            rollBack();
             if (rigidbody2D.velocity.x < 5f)
             {
                 rigidbody2D.AddForce(new Vector2(1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
@@ -112,7 +123,29 @@ public class Ball : MonoBehaviour
             }
             gameObject.transform.localPosition = px;
         }
+        if(Item == "ForwardItem")
+        {
+            if(rigidbody2D.velocity.x>0)
+            {
+                rigidbody2D.gravityScale = 0f;
+                direction = "right";
+                fly = true;
+            }
+            else
+            {
+                rigidbody2D.gravityScale = 0f;
+                direction = "left";
+                fly = true;
 
+            }
+        }
+
+    }
+
+    void rollBack()
+    {
+        fly = false;
+        rigidbody2D.gravityScale = 1f;
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -144,6 +177,26 @@ public class Ball : MonoBehaviour
         {
             gameObject.transform.position = collision.transform.Find("whiteHole1").gameObject.transform.position;
         }
+        if(collision.gameObject.CompareTag("RightForwardBlock"))
+        {
+            Vector2 ps = gameObject.transform.position;
+            ps.x +=1f;
+            ps.y +=-1f;
+            gameObject.transform.position = collision.transform.position;
+            rigidbody2D.gravityScale = 0f;
+            direction = "right";
+            fly = true;
+        }
+        if(collision.gameObject.CompareTag("LeftForwardBlock"))
+        {
+            Vector2 ps = gameObject.transform.position;
+            ps.x +=-1f;
+            ps.y +=-1f;
+            gameObject.transform.localPosition = ps;
+            rigidbody2D.gravityScale = 0f;
+            direction = "left";
+            fly = true;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -168,6 +221,13 @@ public class Ball : MonoBehaviour
             Item = "WarpItem";
             hasItem = true;
             sr.color = Color.green;
+            other.gameObject.SetActive(false);
+        }
+        if(other.CompareTag("ForwardItem"))
+        {
+            Item = "ForwardItem";
+            hasItem = true;
+            sr.color = new Color(1f,0f,1f,1f);
             other.gameObject.SetActive(false);
         }
         if(other.CompareTag("Star"))
