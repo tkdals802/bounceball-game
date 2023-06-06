@@ -56,7 +56,7 @@ public class Ball : MonoBehaviour
             if(hasItem)
             {
                 useItem();
-                sr.material.color = new Color(255f,255f,0,255f);
+                sr.color = new Color(1f,1f,0,1f);
                 hasItem = false;
             }
         }
@@ -152,7 +152,7 @@ public class Ball : MonoBehaviour
         {
             Item = "JumpItem";
             hasItem = true;
-            sr.material.color = Color.black;
+            sr.color = Color.black;
             other.gameObject.SetActive(false);
         }
         if(other.CompareTag("DashItem"))
