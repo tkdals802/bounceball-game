@@ -15,6 +15,7 @@ TagManager:
   - Destroy
   - BlackHole
   - Forward
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
@@ -49,6 +50,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: comeBack
+    uniqueID: 1265742875
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: checkPoint
+    uniqueID: 3130919347
     locked: 0
