@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 4906874726233933315}
   m_Layer: 0
   m_Name: LeftForwardBlock 2
-  m_TagString: ForwardBlock
+  m_TagString: LeftForwardBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
