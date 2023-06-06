@@ -18,6 +18,8 @@ public class Ball : MonoBehaviour
     public string Item; //무슨 아이템을 먹었는지 식별
     public bool hasItem; //아이템을 끼고있으면 True 아니면 False
     public GameObject start;
+    public Vector2 checkPoint;
+
     void Awake()
     {
         rigidbody2D = this.GetComponent<Rigidbody2D>();
@@ -67,7 +69,7 @@ public class Ball : MonoBehaviour
             if(hasItem)
             {
                 useItem();
-                sr.color = new Color(1f,1f,0,1f);
+                sr.color = new Color(1.0f,1.0f,0,1.0f);
                 hasItem = false;
             }
         }
@@ -136,6 +138,15 @@ public class Ball : MonoBehaviour
                 rigidbody2D.gravityScale = 0f;
                 direction = "left";
                 fly = true;
+        if (Item == "CheckPoint")
+        {
+            GameObject back = GameObject.Find("comeBack");
+            this.transform.position = checkPoint;
+            back.SetActive(false);
+            
+        }
+
+
 
             }
         }
@@ -197,6 +208,7 @@ public class Ball : MonoBehaviour
             direction = "left";
             fly = true;
         }
+        
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -205,7 +217,7 @@ public class Ball : MonoBehaviour
         {
             Item = "JumpItem";
             hasItem = true;
-            sr.color = Color.black;
+            sr.material.color = Color.black;
             other.gameObject.SetActive(false);
         }
         if(other.CompareTag("DashItem"))
@@ -231,10 +243,23 @@ public class Ball : MonoBehaviour
             other.gameObject.SetActive(false);
         }
         if(other.CompareTag("Star"))
+        if (other.CompareTag("CheckPoint"))
+        {
+            Item = "CheckPoint";
+            hasItem = true;
+            sr.color = Color.red;
+            checkPoint = other.transform.position;
+            other.gameObject.SetActive(false);
+            
+
+
+        }
+        if (other.CompareTag("Star"))
         {
             lg.GetStar();
             other.gameObject.SetActive(false);  
         }
+        
         
     }
 

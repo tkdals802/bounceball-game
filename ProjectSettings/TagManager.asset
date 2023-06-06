@@ -17,6 +17,7 @@ TagManager:
   - RightForwardBlock
   - LeftForwardBlock
   - ForwardItem
+  - Forward
   layers:
   - Default
   - TransparentFX
