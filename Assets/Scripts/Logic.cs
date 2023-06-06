@@ -35,6 +35,11 @@ public class Logic : MonoBehaviour
             Time.timeScale=0f; //시간을 멈춰서 일시정지상태로만듬
         }
     }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Time.timeScale=1f;
+    }   
     void Update()
     {
         
