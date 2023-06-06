@@ -16,6 +16,8 @@ public class Ball : MonoBehaviour
     public string Item; //무슨 아이템을 먹었는지 식별
     public bool hasItem; //아이템을 끼고있으면 True 아니면 False
     public GameObject start;
+    public Vector2 checkPoint;
+
     void Awake()
     {
         rigidbody2D = this.GetComponent<Rigidbody2D>();
@@ -112,6 +114,15 @@ public class Ball : MonoBehaviour
             }
             gameObject.transform.localPosition = px;
         }
+        if (Item == "CheckPoint")
+        {
+            GameObject back = GameObject.Find("comeBack");
+            this.transform.position = checkPoint;
+            back.SetActive(false);
+            
+        }
+
+
 
     }
     void OnCollisionEnter2D(Collision2D collision)
@@ -144,6 +155,7 @@ public class Ball : MonoBehaviour
         {
             gameObject.transform.position = collision.transform.Find("whiteHole1").gameObject.transform.position;
         }
+        
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -170,11 +182,23 @@ public class Ball : MonoBehaviour
             sr.color = Color.green;
             other.gameObject.SetActive(false);
         }
-        if(other.CompareTag("Star"))
+        if (other.CompareTag("CheckPoint"))
+        {
+            Item = "CheckPoint";
+            hasItem = true;
+            sr.color = Color.red;
+            checkPoint = other.transform.position;
+            other.gameObject.SetActive(false);
+            
+
+
+        }
+        if (other.CompareTag("Star"))
         {
             lg.GetStar();
             other.gameObject.SetActive(false);  
         }
+        
         
     }
 
