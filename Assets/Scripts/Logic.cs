@@ -13,7 +13,7 @@ public class Logic : MonoBehaviour
     
     void Awake()
     {
-        
+        Time.timeScale=1f;
     }
     void Start()
     {
