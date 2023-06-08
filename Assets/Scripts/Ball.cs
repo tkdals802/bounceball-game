@@ -16,19 +16,24 @@ public class Ball : MonoBehaviour
     public float normal_jump; //노말블럭에 닿았을때 점프력
     public float up_jump; //상승블럭 혹은 점프 아이템을 사용했을때 높이
     public string Item; //무슨 아이템을 먹었는지 식별
-    public bool hasItem; //아이템을 끼고있으면 True 아니면 False
+    //public bool hasItem; //아이템을 끼고있으면 True 아니면 False
     public GameObject start;
     public Vector2 checkPoint;
+    private Animator anime; //애니메이션 
+    private bool c_p;//체크포인트 bool
+    private bool c_i;//아이템 먹었는지 체크 bool
+    
 
     void Awake()
     {
         rigidbody2D = this.GetComponent<Rigidbody2D>();
         transform = this.GetComponent<Transform>();
         sr = this.GetComponent<SpriteRenderer>();
+        anime = GetComponent<Animator>();
         normal_jump = 900f;
         up_jump = 1500f;
         m_fSpeed = 500f;
-        hasItem = false;
+        
     }
 
     void Start()
@@ -36,7 +41,8 @@ public class Ball : MonoBehaviour
     }
     void Update()
     {
-        if(fly)
+
+        if (fly)
         {
             if(direction == "right")
                 rigidbody2D.velocity = new Vector2(10f,1f); 
@@ -54,6 +60,7 @@ public class Ball : MonoBehaviour
             {
                 rigidbody2D.AddForce(new Vector2(-1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
             }
+            
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
@@ -66,11 +73,11 @@ public class Ball : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(hasItem)
+            if(c_i == true || c_p==true)
             {
                 useItem();
                 sr.color = new Color(1.0f,1.0f,0,1.0f);
-                hasItem = false;
+                
             }
         }
 
@@ -91,66 +98,72 @@ public class Ball : MonoBehaviour
         {
             rigidbody2D.AddForce(new Vector2(0f, -5f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
         }
+
+        Debug.Log("체크" + c_p + c_i);
+
     }
     //본인이 만든 아이템 로직을 여기다가 구현 
     //구현하기전에 밑에 OnTriggerEnter에서 String을 바꿔야함
     void useItem()
     {
-        if(Item == "JumpItem")
-        {
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
-            rigidbody2D.AddForce(new Vector2(0f, up_jump), ForceMode2D.Force);
+        if ((c_p == true && c_i==true) ||(c_p == false && c_i==true))//체크포인트먹고 아이템도 먹거나, 아이템만 먹은 상태
+        {//이 상태에서는 아이템을 사용
+            if (Item == "JumpItem")
+            {
+                rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
+                rigidbody2D.AddForce(new Vector2(0f, up_jump), ForceMode2D.Force);
+            }
+            if (Item == "DashItem")
+            {
+                if (rigidbody2D.velocity.x > 0)
+                {
+                    rigidbody2D.AddForce(new Vector2(up_jump, 0f), ForceMode2D.Force);
+                }
+                else
+                {
+                    rigidbody2D.AddForce(new Vector2(-1 * up_jump, 0f), ForceMode2D.Force);
+                }
+            }
+            if (Item == "WarpItem")
+            {
+                Vector2 px = gameObject.transform.localPosition;
+                if (rigidbody2D.velocity.x > 0)
+                {
+                    px.x = px.x + 3;
+                }
+                else
+                {
+                    px.x = px.x - 3;
+                }
+                gameObject.transform.localPosition = px;
+            }
+            if (Item == "ForwardItem")
+            {
+                if (rigidbody2D.velocity.x > 0)
+                {
+                    rigidbody2D.gravityScale = 0f;
+                    direction = "right";
+                    fly = true;
+                }
+                else
+                {
+                    rigidbody2D.gravityScale = 0f;
+                    direction = "left";
+                    fly = true;
+                }
+            }
+            c_i = false;
         }
-        if (Item == "DashItem")
-        {
-            if (rigidbody2D.velocity.x > 0)
-            {
-                rigidbody2D.AddForce(new Vector2(up_jump, 0f), ForceMode2D.Force);
-            }
-            else
-            {
-                rigidbody2D.AddForce(new Vector2(-1*up_jump, 0f), ForceMode2D.Force);
-            }
-        }
-        if(Item == "WarpItem")
-        {
-            Vector2 px = gameObject.transform.localPosition;
-            if (rigidbody2D.velocity.x > 0)
-            {
-                px.x = px.x+3;
-            }
-            else
-            {
-                px.x = px.x - 3;   
-            }
-            gameObject.transform.localPosition = px;
-        }
-        if(Item == "ForwardItem")
-        {
-            if(rigidbody2D.velocity.x>0)
-            {
-                rigidbody2D.gravityScale = 0f;
-                direction = "right";
-                fly = true;
-            }
-            else
-            {
-                rigidbody2D.gravityScale = 0f;
-                direction = "left";
-                fly = true;
-            }
-        }
-        if (Item == "CheckPoint")
+        if(c_p==true && c_i==false)//아이템x 체크포인트 o
         {
             GameObject back = GameObject.Find("comeBack");
             this.transform.position = checkPoint;
             back.SetActive(false);
-            
+            anime.SetBool("ccc", false);
+            c_p = false;
         }
-
-
-
-        }
+        
+    }
 
     
 
@@ -217,47 +230,43 @@ public class Ball : MonoBehaviour
         if(other.CompareTag("JumpItem"))
         {
             Item = "JumpItem";
-            hasItem = true;
             sr.material.color = Color.black;
-            other.gameObject.SetActive(false);
+            c_i = true;
         }
         if(other.CompareTag("DashItem"))
         {
             Color brown = new Color(0.68f, 0.29f,0.0f,1.0f);
             Item = "DashItem";
-            hasItem = true;
             sr.color = brown;
-            other.gameObject.SetActive(false);
+            c_i = true;
         }
         if (other.CompareTag("WarpItem"))
         {
             Item = "WarpItem";
-            hasItem = true;
             sr.color = Color.green;
-            other.gameObject.SetActive(false);
+            c_i = true;
         }
         if(other.CompareTag("ForwardItem"))
         {
             Item = "ForwardItem";
-            hasItem = true;
             sr.color = new Color(1f,0f,1f,1f);
-            other.gameObject.SetActive(false);
+            c_i = true;
         }
         if (other.CompareTag("CheckPoint"))
         {
             Item = "CheckPoint";
-            hasItem = true;
-            sr.color = Color.red;
             checkPoint = other.transform.position;
-            other.gameObject.SetActive(false);
+            anime.SetBool("ccc", true);
+            c_p = true;
         }
         if (other.CompareTag("Star"))
         {
             lg.GetStar();
-            other.gameObject.SetActive(false);  
         }
-        
-        
+        other.gameObject.SetActive(false);
     }
+
+    
+   
 
 }
