@@ -40,6 +40,8 @@ public class Ball : MonoBehaviour
 
     void Start()
     {
+        rigidbody2D.velocity = new Vector2(0, 0);
+        fly = false;
     }
     void Update()
     {
@@ -207,9 +209,9 @@ public class Ball : MonoBehaviour
         if(collision.gameObject.CompareTag("RightForwardBlock"))
         {
             Vector2 ps = gameObject.transform.position;
-            ps.x +=1f;
-            ps.y +=-0.5f;
-            gameObject.transform.position = collision.transform.position;
+            ps.x += 1f;
+            ps.y += -1.0f;
+            gameObject.transform.position = ps;//collision.transform.position;
             rigidbody2D.gravityScale = 0f;
             direction = "right";
             fly = true;
@@ -217,8 +219,8 @@ public class Ball : MonoBehaviour
         if(collision.gameObject.CompareTag("LeftForwardBlock"))
         {
             Vector2 ps = gameObject.transform.position;
-            ps.x +=-1f;
-            ps.y +=-0.5f;
+            ps.x += -1.0f;
+            ps.y += -1.0f;
             gameObject.transform.localPosition = ps;
             rigidbody2D.gravityScale = 0f;
             direction = "left";

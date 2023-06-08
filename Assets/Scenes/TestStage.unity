@@ -1302,11 +1302,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4498485339981028786, guid: 67265108e8c48c04d96b04f769adac93, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -28.535513
+      value: -35.64
       objectReference: {fileID: 0}
     - target: {fileID: 4498485339981028786, guid: 67265108e8c48c04d96b04f769adac93, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.26870334
+      value: 5.63
       objectReference: {fileID: 0}
     - target: {fileID: 4498485339981028786, guid: 67265108e8c48c04d96b04f769adac93, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2173,11 +2173,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2759829409995139652, guid: 6cb764f02ad4e094cae2b57636b00400, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2759829409995139652, guid: 6cb764f02ad4e094cae2b57636b00400, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.27452
+      value: -29.68
       objectReference: {fileID: 0}
     - target: {fileID: 2759829409995139652, guid: 6cb764f02ad4e094cae2b57636b00400, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2299,12 +2299,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637552435}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.02, y: 0.61, z: 0}
+  m_LocalPosition: {x: -29.58, y: 0.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1637552438
 BoxCollider2D:
@@ -2533,7 +2533,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1803992486
 PrefabInstance:
@@ -2791,7 +2791,7 @@ RectTransform:
   m_Children:
   - {fileID: 754037866}
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
