@@ -15,6 +15,7 @@ public class Ball : MonoBehaviour
     public float m_fSpeed;
     public float normal_jump; //노말블럭에 닿았을때 점프력
     public float up_jump; //상승블럭 혹은 점프 아이템을 사용했을때 높이
+    public float dashSpeed;
     public string Item; //무슨 아이템을 먹었는지 식별
     //public bool hasItem; //아이템을 끼고있으면 True 아니면 False
     public GameObject start;
@@ -29,11 +30,12 @@ public class Ball : MonoBehaviour
         rigidbody2D = this.GetComponent<Rigidbody2D>();
         transform = this.GetComponent<Transform>();
         sr = this.GetComponent<SpriteRenderer>();
-        anime = GetComponent<Animator>();
-        normal_jump = 900f;
-        up_jump = 1500f;
+        anime = GetComponent<Animator>();      
+        normal_jump = 800f;
+        up_jump = 1200f;
         m_fSpeed = 500f;
-        
+        dashSpeed = 800f;
+        hasItem = false;
     }
 
     void Start()
@@ -155,6 +157,46 @@ public class Ball : MonoBehaviour
             c_i = false;
         }
         if(c_p==true && c_i==false)//아이템x 체크포인트 o
+        if (Item == "DashItem")
+        {
+            if (rigidbody2D.velocity.x > 0)
+            {
+                rigidbody2D.AddForce(new Vector2(dashSpeed, 0f), ForceMode2D.Force);
+            }
+            else
+            {
+                rigidbody2D.AddForce(new Vector2(-1*dashSpeed, 0f), ForceMode2D.Force);
+            }
+        }
+        if(Item == "WarpItem")
+        {
+            Vector2 px = gameObject.transform.localPosition;
+            if (rigidbody2D.velocity.x > 0)
+            {
+                px.x = px.x+3;
+            }
+            else
+            {
+                px.x = px.x - 3;   
+            }
+            gameObject.transform.localPosition = px;
+        }
+        if(Item == "ForwardItem")
+        {
+            if(rigidbody2D.velocity.x>0)
+            {
+                rigidbody2D.gravityScale = 0f;
+                direction = "right";
+                fly = true;
+            }
+            else
+            {
+                rigidbody2D.gravityScale = 0f;
+                direction = "left";
+                fly = true;
+            }
+        }
+        if (Item == "CheckPoint")
         {
             GameObject back = GameObject.Find("comeBack");
             this.transform.position = checkPoint;
@@ -230,8 +272,9 @@ public class Ball : MonoBehaviour
         if(other.CompareTag("JumpItem"))
         {
             Item = "JumpItem";
-            sr.material.color = Color.black;
             c_i = true;
+            sr.color = Color.black;
+            other.gameObject.SetActive(false);
         }
         if(other.CompareTag("DashItem"))
         {
