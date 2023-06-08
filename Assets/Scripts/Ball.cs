@@ -47,9 +47,10 @@ public class Ball : MonoBehaviour
         if (fly)
         {
             if(direction == "right")
-                rigidbody2D.velocity = new Vector2(10f,1f); 
+                rigidbody2D.velocity = new Vector2(15f,1f); 
             else if(direction == "left")
-                rigidbody2D.velocity = new Vector2(-10f,1f);
+                rigidbody2D.velocity = new Vector2(-15f,1f);
+            
         }
         if(transform.position.y<-30) //떨어진경우 다시 원점으로 복귀
         {
@@ -164,6 +165,7 @@ public class Ball : MonoBehaviour
             anime.SetBool("ccc", false);
             c_p = false;
         }
+        
     }
 
     
@@ -192,7 +194,6 @@ public class Ball : MonoBehaviour
         if(collision.gameObject.CompareTag("UpBlock"))
         {
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
-            //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
             rigidbody2D.AddForce(new Vector2(0f, up_jump), ForceMode2D.Force);
         }
         if(collision.gameObject.CompareTag("Obstacle"))
@@ -207,7 +208,7 @@ public class Ball : MonoBehaviour
         {
             Vector2 ps = gameObject.transform.position;
             ps.x +=1f;
-            ps.y +=-1f;
+            ps.y +=-0.5f;
             gameObject.transform.position = collision.transform.position;
             rigidbody2D.gravityScale = 0f;
             direction = "right";
@@ -217,13 +218,52 @@ public class Ball : MonoBehaviour
         {
             Vector2 ps = gameObject.transform.position;
             ps.x +=-1f;
-            ps.y +=-1f;
+            ps.y +=-0.5f;
             gameObject.transform.localPosition = ps;
             rigidbody2D.gravityScale = 0f;
             direction = "left";
             fly = true;
         }
-        
+        if (collision.gameObject.CompareTag("Destroy_L_F"))
+        {
+            Vector2 ps = gameObject.transform.position;
+            ps.x += -1f;
+            ps.y += -1.0f;
+            gameObject.transform.localPosition = ps;
+            rigidbody2D.gravityScale = 0f;
+            direction = "left";
+            fly = true;
+            GameObject collideObject = collision.gameObject;
+            Destroy(collideObject);
+        }
+        if (collision.gameObject.CompareTag("Destroy_R_F"))
+        {
+            Vector2 ps = gameObject.transform.position;
+            ps.x += 1f;
+            ps.y += -1.0f;
+            gameObject.transform.position = ps;//collision.transform.position;
+            rigidbody2D.gravityScale = 0f;
+            direction = "right";
+            fly = true;
+            GameObject collideObject = collision.gameObject;
+            Destroy(collideObject);
+        }
+        if (collision.gameObject.CompareTag("Destroy_Jump"))
+        {
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
+            rigidbody2D.AddForce(new Vector2(0f, up_jump), ForceMode2D.Force);
+            GameObject collideObject = collision.gameObject;
+            Destroy(collideObject);
+        }
+        if (collision.gameObject.CompareTag("Untagged"))
+        {
+            float v = rigidbody2D.velocity.x;
+            rollBack();
+            rigidbody2D.AddForce(new Vector2(-1*v, 0f));
+
+        }
+
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
