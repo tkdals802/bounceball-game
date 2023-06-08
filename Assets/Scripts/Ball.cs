@@ -35,7 +35,7 @@ public class Ball : MonoBehaviour
         up_jump = 1200f;
         m_fSpeed = 500f;
         dashSpeed = 800f;
-        hasItem = false;
+
     }
 
     void Start()
@@ -108,7 +108,7 @@ public class Ball : MonoBehaviour
     //구현하기전에 밑에 OnTriggerEnter에서 String을 바꿔야함
     void useItem()
     {
-        if ((c_p == true && c_i==true) ||(c_p == false && c_i==true))//체크포인트먹고 아이템도 먹거나, 아이템만 먹은 상태
+        if (c_i==true)//체크포인트먹고 아이템도 먹거나, 아이템만 먹은 상태
         {//이 상태에서는 아이템을 사용
             if (Item == "JumpItem")
             {
@@ -156,47 +156,7 @@ public class Ball : MonoBehaviour
             }
             c_i = false;
         }
-        if(c_p==true && c_i==false)//아이템x 체크포인트 o
-        if (Item == "DashItem")
-        {
-            if (rigidbody2D.velocity.x > 0)
-            {
-                rigidbody2D.AddForce(new Vector2(dashSpeed, 0f), ForceMode2D.Force);
-            }
-            else
-            {
-                rigidbody2D.AddForce(new Vector2(-1*dashSpeed, 0f), ForceMode2D.Force);
-            }
-        }
-        if(Item == "WarpItem")
-        {
-            Vector2 px = gameObject.transform.localPosition;
-            if (rigidbody2D.velocity.x > 0)
-            {
-                px.x = px.x+3;
-            }
-            else
-            {
-                px.x = px.x - 3;   
-            }
-            gameObject.transform.localPosition = px;
-        }
-        if(Item == "ForwardItem")
-        {
-            if(rigidbody2D.velocity.x>0)
-            {
-                rigidbody2D.gravityScale = 0f;
-                direction = "right";
-                fly = true;
-            }
-            else
-            {
-                rigidbody2D.gravityScale = 0f;
-                direction = "left";
-                fly = true;
-            }
-        }
-        if (Item == "CheckPoint")
+        else if(c_p==true && c_i==false)//아이템x 체크포인트 o
         {
             GameObject back = GameObject.Find("comeBack");
             this.transform.position = checkPoint;
@@ -204,7 +164,6 @@ public class Ball : MonoBehaviour
             anime.SetBool("ccc", false);
             c_p = false;
         }
-        
     }
 
     
@@ -297,7 +256,6 @@ public class Ball : MonoBehaviour
         }
         if (other.CompareTag("CheckPoint"))
         {
-            Item = "CheckPoint";
             checkPoint = other.transform.position;
             anime.SetBool("ccc", true);
             c_p = true;
