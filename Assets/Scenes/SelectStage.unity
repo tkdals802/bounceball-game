@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1178786 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4943684876177891653, guid: 5d37d3b199b44ea46bee68409553033a, type: 3}
-  m_PrefabInstance: {fileID: 4943684876178824679}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &71979837
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,7 +740,7 @@ GameObject:
   - component: {fileID: 1009129800}
   - component: {fileID: 1009129799}
   m_Layer: 5
-  m_Name: Button
+  m_Name: test1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -879,7 +874,7 @@ GameObject:
   - component: {fileID: 1113799125}
   - component: {fileID: 1113799124}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: stage2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -950,9 +945,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1178786}
-        m_TargetAssemblyTypeName: TitleMenu, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 4943684876178824680}
+        m_TargetAssemblyTypeName: StageMenu, Assembly-CSharp
+        m_MethodName: Stage02
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1013,7 +1008,7 @@ GameObject:
   - component: {fileID: 1177100719}
   - component: {fileID: 1177100718}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: test2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1282,7 +1277,7 @@ GameObject:
   - component: {fileID: 1671875893}
   - component: {fileID: 1671875892}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: stage3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1606,7 +1601,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 958591918940984105, guid: 5d37d3b199b44ea46bee68409553033a, type: 3}
   m_PrefabInstance: {fileID: 4943684876178824679}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1178786}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c66bc43359762446b094e175abb2d52, type: 3}
@@ -1621,7 +1616,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6381845239548228168, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
       propertyPath: m_Name
-      value: Button
+      value: stage1
       objectReference: {fileID: 0}
     - target: {fileID: 6381845239548228169, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
       propertyPath: m_Pivot.x
@@ -1710,6 +1705,14 @@ PrefabInstance:
     - target: {fileID: 6381845239548228170, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1178786}
+      objectReference: {fileID: 4943684876178824680}
+    - target: {fileID: 6381845239548228170, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Stage01
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228170, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: StageMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}

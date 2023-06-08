@@ -102,11 +102,11 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 95c0ed96a082b3e44817eb461c145e8d, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &2759829409995139650
 MonoBehaviour:
@@ -120,15 +120,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c86785fcc13f684fb2f26883f1a4061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lg: {fileID: 0}
+  lg: {fileID: 8269707233242420076, guid: eedd7a2399e79c44382c946890c48148, type: 3}
   m_fSpeed: 0
   normal_jump: 0
   up_jump: 0
+  dashSpeed: 0
   Item: 
   hasItem: 0
   start: {fileID: 0}
-  whiteHole1: {fileID: 0}
-  whiteHole2: {fileID: 0}
+  checkPoint: {x: 0, y: 0}
 --- !u!58 &2759829409995139649
 CircleCollider2D:
   m_ObjectHideFlags: 0

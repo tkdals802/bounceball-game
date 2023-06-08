@@ -15,6 +15,7 @@ public class Ball : MonoBehaviour
     public float m_fSpeed;
     public float normal_jump; //노말블럭에 닿았을때 점프력
     public float up_jump; //상승블럭 혹은 점프 아이템을 사용했을때 높이
+    public float dashSpeed;
     public string Item; //무슨 아이템을 먹었는지 식별
     public bool hasItem; //아이템을 끼고있으면 True 아니면 False
     public GameObject start;
@@ -25,9 +26,10 @@ public class Ball : MonoBehaviour
         rigidbody2D = this.GetComponent<Rigidbody2D>();
         transform = this.GetComponent<Transform>();
         sr = this.GetComponent<SpriteRenderer>();
-        normal_jump = 900f;
-        up_jump = 1500f;
+        normal_jump = 800f;
+        up_jump = 1200f;
         m_fSpeed = 500f;
+        dashSpeed = 800f;
         hasItem = false;
     }
 
@@ -105,11 +107,11 @@ public class Ball : MonoBehaviour
         {
             if (rigidbody2D.velocity.x > 0)
             {
-                rigidbody2D.AddForce(new Vector2(up_jump, 0f), ForceMode2D.Force);
+                rigidbody2D.AddForce(new Vector2(dashSpeed, 0f), ForceMode2D.Force);
             }
             else
             {
-                rigidbody2D.AddForce(new Vector2(-1*up_jump, 0f), ForceMode2D.Force);
+                rigidbody2D.AddForce(new Vector2(-1*dashSpeed, 0f), ForceMode2D.Force);
             }
         }
         if(Item == "WarpItem")
@@ -218,7 +220,7 @@ public class Ball : MonoBehaviour
         {
             Item = "JumpItem";
             hasItem = true;
-            sr.material.color = Color.black;
+            sr.color = Color.black;
             other.gameObject.SetActive(false);
         }
         if(other.CompareTag("DashItem"))
