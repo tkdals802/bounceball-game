@@ -87,6 +87,7 @@ public class Ball : MonoBehaviour
 		if (Input.GetKey(KeyCode.RightArrow))
 		{
 			rollBack();
+             
 			if (rigidbody2D.velocity.x < 4f)
 			{
 				rigidbody2D.AddForce(new Vector2(1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
@@ -147,7 +148,7 @@ public class Ball : MonoBehaviour
 		if(dir=="right")
 		{
 			Vector2 ps = gameObject.transform.position;
-			ps.x += 1f;
+			ps.x += 1.5f;
 			ps.y += -1.0f;
 			gameObject.transform.position = ps;//collision.transform.position;
 			rigidbody2D.gravityScale = 0f;
@@ -157,7 +158,7 @@ public class Ball : MonoBehaviour
 		else if(dir=="left")
 		{
 			Vector2 ps = gameObject.transform.position;
-			ps.x += -1.0f;
+			ps.x += -1.5f;
 			ps.y += -1.0f;
 			gameObject.transform.localPosition = ps;
 			rigidbody2D.gravityScale = 0f;
