@@ -26,23 +26,25 @@ public class Ball : MonoBehaviour
 
 	// 사운드
     [SerializeField]
-    private AudioSource ballSound;	// 공 튀는 소리 ㅇ
+    private AudioSource ballSound;	// 공 튀는 소리
     [SerializeField]
-    private AudioSource destroySound;		// 소멸블럭 부서지는 소리 ㅇ
+    private AudioSource ballBurstSound;	// 공 터지는 소리
     [SerializeField]
-    private AudioSource upBlockSound;		// 상승블럭 소리 ㅇ
+    private AudioSource destroySound;		// 소멸블럭 부서지는 소리
     [SerializeField]
-    private AudioSource lightningSound;	// 번개블럭 소리 ㅇ
+    private AudioSource upBlockSound;		// 상승블럭 소리
     [SerializeField]
-    private AudioSource blackholeSound;	// 블랙홀 소리 ㅇ
+    private AudioSource lightningSound;	// 번개블럭 소리
     [SerializeField]
-    private AudioSource forwardBlockSound;	// 직진블럭 소리 ㅇ
+    private AudioSource blackholeSound;	// 블랙홀 소리
     [SerializeField]
-    private AudioSource getItemSound;		// 아이템 먹는 소리 ㅇ
+    private AudioSource forwardBlockSound;	// 직진블럭 소리
     [SerializeField]
-    private AudioSource useItemSound;		// 아이템 사용 소리 ㅇ
+    private AudioSource getItemSound;		// 아이템 먹는 소리
     [SerializeField]
-    private AudioSource getStarSound;		// 별 먹는 소리 ㅇ
+    private AudioSource useItemSound;		// 아이템 사용 소리
+    [SerializeField]
+    private AudioSource getStarSound;		// 별 먹는 소리
 
 
     void Awake()
@@ -75,7 +77,8 @@ public class Ball : MonoBehaviour
 		}
 		if(transform.position.y<-30) //떨어진경우 다시 원점으로 복귀
 		{
-			SceneLoad();
+			ballBurstSound.Play();		// 공 터지는 소리
+            SceneLoad();
 		}
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
@@ -265,8 +268,8 @@ public class Ball : MonoBehaviour
 		}
 		if(collision.gameObject.CompareTag("Obstacle"))
 		{
-			lightningSound.Play();	// 번개블럭 소리
-			SceneLoad();
+            ballBurstSound.Play();      // 공 터지는 소리
+            SceneLoad();
 		}
 		if(collision.gameObject.CompareTag("RightForwardBlock"))
 		{
