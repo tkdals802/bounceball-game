@@ -49,14 +49,13 @@ public class Ball : MonoBehaviour
         if (fly)
         {
             if(direction == "right")
-                rigidbody2D.velocity = new Vector2(15f,1f); 
+                rigidbody2D.velocity = new Vector2(10f,1f); 
             else if(direction == "left")
-                rigidbody2D.velocity = new Vector2(-15f,1f);
-            
+                rigidbody2D.velocity = new Vector2(-10f,1f);
         }
         if(transform.position.y<-30) //떨어진경우 다시 원점으로 복귀
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.name);
+            SceneLoad();
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -107,29 +106,71 @@ public class Ball : MonoBehaviour
         Debug.Log("체크" + c_p + c_i);
 
     }
+
+    private void Normaljump() //노멀블럭에서의 점프
+    {
+        rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
+        //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
+        rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
+    }
+    private void UpJump() //상승점프
+    {
+        rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
+        rigidbody2D.AddForce(new Vector2(0f, up_jump), ForceMode2D.Force);
+    }
+
+    private void SceneLoad()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.name);//Scene reload
+    }
+    
+    private void GoForward(string dir)
+    {
+        if(dir=="right")
+        {
+            Vector2 ps = gameObject.transform.position;
+            ps.x += 1f;
+            ps.y += -1.0f;
+            gameObject.transform.position = ps;//collision.transform.position;
+            rigidbody2D.gravityScale = 0f;
+            direction = "right";
+            fly = true;
+        }
+        else if(dir=="left")
+        {
+            Vector2 ps = gameObject.transform.position;
+            ps.x += -1.0f;
+            ps.y += -1.0f;
+            gameObject.transform.localPosition = ps;
+            rigidbody2D.gravityScale = 0f;
+            direction = "left";
+            fly = true;
+        }
+        
+    }
+
     //본인이 만든 아이템 로직을 여기다가 구현 
     //구현하기전에 밑에 OnTriggerEnter에서 String을 바꿔야함
     void useItem()
     {
         if (c_i==true)//체크포인트먹고 아이템도 먹거나, 아이템만 먹은 상태
         {//이 상태에서는 아이템을 사용
-            if (Item == "JumpItem")
+            if (Item == "JumpItem") //점프아이템
             {
-                rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
-                rigidbody2D.AddForce(new Vector2(0f, up_jump), ForceMode2D.Force);
+                UpJump();
             }
-            if (Item == "DashItem")
+            if (Item == "DashItem") //대쉬아이템
             {
                 if (rigidbody2D.velocity.x > 0)
                 {
-                    rigidbody2D.AddForce(new Vector2(up_jump, 0f), ForceMode2D.Force);
+                    rigidbody2D.AddForce(new Vector2(dashSpeed, 0f), ForceMode2D.Force);
                 }
                 else
                 {
-                    rigidbody2D.AddForce(new Vector2(-1 * up_jump, 0f), ForceMode2D.Force);
+                    rigidbody2D.AddForce(new Vector2(-1 * dashSpeed, 0f), ForceMode2D.Force);
                 }
             }
-            if (Item == "WarpItem")
+            if (Item == "WarpItem") //워프아이템
             {
                 Vector2 px = gameObject.transform.localPosition;
                 if (rigidbody2D.velocity.x > 0)
@@ -142,7 +183,7 @@ public class Ball : MonoBehaviour
                 }
                 gameObject.transform.localPosition = px;
             }
-            if (Item == "ForwardItem")
+            if (Item == "ForwardItem") //직진아이템
             {
                 if (rigidbody2D.velocity.x > 0)
                 {
@@ -172,7 +213,7 @@ public class Ball : MonoBehaviour
 
     
 
-    void rollBack()
+    void rollBack() //직진중에 방향키가 입력되면 떨어지게함
     {
         fly = false;
         rigidbody2D.gravityScale = 1f;
@@ -181,26 +222,21 @@ public class Ball : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Normal Block"))
         {
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
-            //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
-            rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
+            Normaljump();
         }
         if (collision.gameObject.CompareTag("Destroy"))
         {
+            Normaljump();
             GameObject collideObject = collision.gameObject;
             Destroy(collideObject);
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
-            //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
-            rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
         }
         if(collision.gameObject.CompareTag("UpBlock"))
         {
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
-            rigidbody2D.AddForce(new Vector2(0f, up_jump), ForceMode2D.Force);
+            UpJump();
         }
         if(collision.gameObject.CompareTag("Obstacle"))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.name);//Scene reload
+            SceneLoad();
         }
         if (collision.gameObject.CompareTag("BlackHole"))
         {
@@ -208,52 +244,27 @@ public class Ball : MonoBehaviour
         }
         if(collision.gameObject.CompareTag("RightForwardBlock"))
         {
-            Vector2 ps = gameObject.transform.position;
-            ps.x += 1f;
-            ps.y += -1.0f;
-            gameObject.transform.position = ps;//collision.transform.position;
-            rigidbody2D.gravityScale = 0f;
-            direction = "right";
-            fly = true;
+            GoForward("right");
         }
         if(collision.gameObject.CompareTag("LeftForwardBlock"))
         {
-            Vector2 ps = gameObject.transform.position;
-            ps.x += -1.0f;
-            ps.y += -1.0f;
-            gameObject.transform.localPosition = ps;
-            rigidbody2D.gravityScale = 0f;
-            direction = "left";
-            fly = true;
+            GoForward("left");
         }
-        if (collision.gameObject.CompareTag("Destroy_L_F"))
+        if (collision.gameObject.CompareTag("Destroy_L_F")) //부서지는 왼쪽직진블록
         {
-            Vector2 ps = gameObject.transform.position;
-            ps.x += -1f;
-            ps.y += -1.0f;
-            gameObject.transform.localPosition = ps;
-            rigidbody2D.gravityScale = 0f;
-            direction = "left";
-            fly = true;
+            GoForward("right");
             GameObject collideObject = collision.gameObject;
             Destroy(collideObject);
         }
-        if (collision.gameObject.CompareTag("Destroy_R_F"))
+        if (collision.gameObject.CompareTag("Destroy_R_F")) //부서지는 오른쪽직진블록
         {
-            Vector2 ps = gameObject.transform.position;
-            ps.x += 1f;
-            ps.y += -1.0f;
-            gameObject.transform.position = ps;//collision.transform.position;
-            rigidbody2D.gravityScale = 0f;
-            direction = "right";
-            fly = true;
+            GoForward("left");
             GameObject collideObject = collision.gameObject;
             Destroy(collideObject);
         }
         if (collision.gameObject.CompareTag("Destroy_Jump"))
         {
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
-            rigidbody2D.AddForce(new Vector2(0f, up_jump), ForceMode2D.Force);
+            UpJump();
             GameObject collideObject = collision.gameObject;
             Destroy(collideObject);
         }

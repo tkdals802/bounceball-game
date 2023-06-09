@@ -36,7 +36,7 @@ public class Logic : MonoBehaviour
         }
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) //씬이 로드되면 정상시간에 작동
     {
         Time.timeScale=1f;
     }   
