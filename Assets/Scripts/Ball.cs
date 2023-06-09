@@ -54,7 +54,7 @@ public class Ball : MonoBehaviour
 		normal_jump = 800f;
 		up_jump = 1200f;
 		m_fSpeed = 500f;
-		dashSpeed = 800f;
+		dashSpeed = 450f;
 
 	}
 
@@ -80,7 +80,7 @@ public class Ball : MonoBehaviour
 		if (Input.GetKey(KeyCode.LeftArrow))
 		{
 			rollBack();
-			if (rigidbody2D.velocity.x > -5f)
+			if (rigidbody2D.velocity.x > -4f)
 			{
 				rigidbody2D.AddForce(new Vector2(-1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
 			}
@@ -89,7 +89,8 @@ public class Ball : MonoBehaviour
 		if (Input.GetKey(KeyCode.RightArrow))
 		{
 			rollBack();
-			if (rigidbody2D.velocity.x < 5f)
+             
+			if (rigidbody2D.velocity.x < 4f)
 			{
 				rigidbody2D.AddForce(new Vector2(1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
 			}
@@ -149,7 +150,7 @@ public class Ball : MonoBehaviour
 		if(dir=="right")
 		{
 			Vector2 ps = gameObject.transform.position;
-			ps.x += 1f;
+			ps.x += 1.5f;
 			ps.y += -1.0f;
 			gameObject.transform.position = ps;//collision.transform.position;
 			rigidbody2D.gravityScale = 0f;
@@ -159,7 +160,7 @@ public class Ball : MonoBehaviour
 		else if(dir=="left")
 		{
 			Vector2 ps = gameObject.transform.position;
-			ps.x += -1.0f;
+			ps.x += -1.5f;
 			ps.y += -1.0f;
 			gameObject.transform.localPosition = ps;
 			rigidbody2D.gravityScale = 0f;
@@ -267,11 +268,6 @@ public class Ball : MonoBehaviour
 			lightningSound.Play();	// 번개블럭 소리
 			SceneLoad();
 		}
-		if (collision.gameObject.CompareTag("BlackHole"))
-		{
-			blackholeSound.Play();		// 블랙홀 소리
-            gameObject.transform.position = collision.transform.Find("whiteHole1").gameObject.transform.position;
-		}
 		if(collision.gameObject.CompareTag("RightForwardBlock"))
 		{
 			forwardBlockSound.Play();	// 직진블럭 소리
@@ -331,6 +327,7 @@ public class Ball : MonoBehaviour
 			Item = "DashItem";
 			sr.color = brown;
 			c_i = true;
+            other.gameObject.SetActive(false);
 		}
 		if (other.CompareTag("WarpItem"))
 		{
@@ -338,6 +335,7 @@ public class Ball : MonoBehaviour
             Item = "WarpItem";
 			sr.color = Color.green;
 			c_i = true;
+            other.gameObject.SetActive(false);
 		}
 		if(other.CompareTag("ForwardItem"))
 		{
@@ -345,6 +343,7 @@ public class Ball : MonoBehaviour
             Item = "ForwardItem";
 			sr.color = new Color(1f,0f,1f,1f);
 			c_i = true;
+            other.gameObject.SetActive(false);
 		}
 		if (other.CompareTag("CheckPoint"))
 		{
@@ -352,13 +351,19 @@ public class Ball : MonoBehaviour
             checkPoint = other.transform.position;
 			anime.SetBool("ccc", true);
 			c_p = true;
+            other.gameObject.SetActive(false);
 		}
 		if (other.CompareTag("Star"))
 		{
 			getStarSound.Play();		// 별 먹는 소리
 			lg.GetStar();
+            other.gameObject.SetActive(false);
 		}
-		other.gameObject.SetActive(false);
+        if (other.CompareTag("BlackHole"))
+		{
+			blackholeSound.Play();		// 블랙홀 소리
+            gameObject.transform.position = other.transform.Find("whiteHole1").gameObject.transform.position;
+		}
 	}
 
 	
