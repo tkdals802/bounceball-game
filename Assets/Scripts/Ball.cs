@@ -39,6 +39,8 @@ public class Ball : MonoBehaviour
     private AudioSource forwardBlockSound;	// 직진블럭 소리 ㅇ
     [SerializeField]
     private AudioSource getItemSound;		// 아이템 먹는 소리
+    [SerializeField]
+    private AudioSource getStarSound;		// 별 먹는 소리
 
 
     void Awake()
@@ -309,38 +311,44 @@ public class Ball : MonoBehaviour
 	{
 		if(other.CompareTag("JumpItem"))
 		{
-			Item = "JumpItem";
+			getItemSound.Play();	// 아이템 먹는 소리
+            Item = "JumpItem";
 			c_i = true;
 			sr.color = Color.black;
 			other.gameObject.SetActive(false);
 		}
 		if(other.CompareTag("DashItem"))
 		{
-			Color brown = new Color(0.68f, 0.29f,0.0f,1.0f);
+            getItemSound.Play();    // 아이템 먹는 소리
+            Color brown = new Color(0.68f, 0.29f,0.0f,1.0f);
 			Item = "DashItem";
 			sr.color = brown;
 			c_i = true;
 		}
 		if (other.CompareTag("WarpItem"))
 		{
-			Item = "WarpItem";
+            getItemSound.Play();    // 아이템 먹는 소리
+            Item = "WarpItem";
 			sr.color = Color.green;
 			c_i = true;
 		}
 		if(other.CompareTag("ForwardItem"))
 		{
-			Item = "ForwardItem";
+            getItemSound.Play();    // 아이템 먹는 소리
+            Item = "ForwardItem";
 			sr.color = new Color(1f,0f,1f,1f);
 			c_i = true;
 		}
 		if (other.CompareTag("CheckPoint"))
 		{
-			checkPoint = other.transform.position;
+            getItemSound.Play();    // 아이템 먹는 소리
+            checkPoint = other.transform.position;
 			anime.SetBool("ccc", true);
 			c_p = true;
 		}
 		if (other.CompareTag("Star"))
 		{
+			getStarSound.Play();		// 별 먹는 소리
 			lg.GetStar();
 		}
 		other.gameObject.SetActive(false);
