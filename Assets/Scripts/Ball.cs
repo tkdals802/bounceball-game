@@ -23,9 +23,21 @@ public class Ball : MonoBehaviour
     private Animator anime; //애니메이션 
     private bool c_p;//체크포인트 bool
     private bool c_i;//아이템 먹었는지 체크 bool
-    private AudioSource audioSource;
-    private AudioClip clip;
-    
+    private Camera mainCamera;
+
+    [SerializeField]
+    private GameObject starEffectPrefab;//별 이펙트
+    [SerializeField]
+    private GameObject ballEffectPrefab;//공 이펙트
+    [SerializeField]
+    private GameObject destroyEffectPrefab;//블록 파괴 이펙트
+    [SerializeField]
+    private GameObject B_destroyEffectPrefab;//블루 블록 파괴 이펙트
+
+
+
+
+
 
     void Awake()
     {
@@ -33,12 +45,10 @@ public class Ball : MonoBehaviour
         transform = this.GetComponent<Transform>();
         sr = this.GetComponent<SpriteRenderer>();
         anime = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
-        clip = GetComponent<AudioClip>();
         normal_jump = 800f;
         up_jump = 1200f;
         m_fSpeed = 500f;
-        dashSpeed = 800f;
+        dashSpeed = 450f;
 
     }
 
@@ -46,6 +56,7 @@ public class Ball : MonoBehaviour
     {
         rigidbody2D.velocity = new Vector2(0, 0);
         fly = false;
+        mainCamera = Camera.main;
     }
     void Update()
     {
@@ -57,9 +68,13 @@ public class Ball : MonoBehaviour
             else if(direction == "left")
                 rigidbody2D.velocity = new Vector2(-10f,1f);
         }
-        if(transform.position.y<-30) //떨어진경우 다시 원점으로 복귀
+        Vector2 viewportPosition = mainCamera.WorldToViewportPoint(transform.position);
+
+        if(viewportPosition.y<0) //떨어진경우 다시 원점으로 복귀
         {
             SceneLoad();
+            GameObject ballClone = Instantiate(ballEffectPrefab);
+            ballClone.transform.position = this.transform.position;//죽는 위치 공 이펙트 발현
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
@@ -235,6 +250,8 @@ public class Ball : MonoBehaviour
             Destroy(collideObject);
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
             rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
+            GameObject destroyClone = Instantiate(destroyEffectPrefab);
+            destroyClone.transform.position = this.transform.position;//소멸블록 이펙트 발현
         }
         if(collision.gameObject.CompareTag("UpBlock"))
         {
@@ -261,18 +278,25 @@ public class Ball : MonoBehaviour
             GoForward("right");
             GameObject collideObject = collision.gameObject;
             Destroy(collideObject);
+            GameObject B_destroyClone = Instantiate(B_destroyEffectPrefab);
+            B_destroyClone.transform.position = this.transform.position;//소멸블록 이펙트 발현
         }
         if (collision.gameObject.CompareTag("Destroy_R_F")) //부서지는 오른쪽직진블록
         {
             GoForward("left");
             GameObject collideObject = collision.gameObject;
             Destroy(collideObject);
+            GameObject B_destroyClone = Instantiate(B_destroyEffectPrefab);
+            B_destroyClone.transform.position = this.transform.position;//소멸블록 이펙트 발현
+
         }
         if (collision.gameObject.CompareTag("Destroy_Jump"))
         {
             UpJump();
             GameObject collideObject = collision.gameObject;
             Destroy(collideObject);
+            GameObject B_destroyClone = Instantiate(B_destroyEffectPrefab);
+            B_destroyClone.transform.position = this.transform.position;//소멸블록 이펙트 발현
         }
         if (collision.gameObject.CompareTag("Untagged"))
         {
@@ -321,6 +345,8 @@ public class Ball : MonoBehaviour
         }
         if (other.CompareTag("Star"))
         {
+            GameObject starClone = Instantiate(starEffectPrefab);
+            starClone.transform.position = other.transform.position;
             lg.GetStar();
         }
         other.gameObject.SetActive(false);

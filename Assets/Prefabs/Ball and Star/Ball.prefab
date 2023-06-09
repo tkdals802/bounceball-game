@@ -126,9 +126,12 @@ MonoBehaviour:
   up_jump: 0
   dashSpeed: 0
   Item: 
-  hasItem: 0
   start: {fileID: 0}
   checkPoint: {x: 0, y: 0}
+  starEffectPrefab: {fileID: 6836819921741495245, guid: ddff8fc4b08366f448b59974e405b667, type: 3}
+  ballEffectPrefab: {fileID: 6836819921741495245, guid: f1c2ccefdd721fb4f9a9c15b6268b69f, type: 3}
+  destroyEffectPrefab: {fileID: 6836819921741495245, guid: 48859463ff82ae942aeb3633bcc79ca3, type: 3}
+  B_destroyEffectPrefab: {fileID: 6836819921741495245, guid: c3c4ee5bdcc98ef4db290722e2842504, type: 3}
 --- !u!58 &2759829409995139649
 CircleCollider2D:
   m_ObjectHideFlags: 0
