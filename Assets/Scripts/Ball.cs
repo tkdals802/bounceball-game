@@ -38,9 +38,11 @@ public class Ball : MonoBehaviour
     [SerializeField]
     private AudioSource forwardBlockSound;	// 직진블럭 소리 ㅇ
     [SerializeField]
-    private AudioSource getItemSound;		// 아이템 먹는 소리
+    private AudioSource getItemSound;		// 아이템 먹는 소리 ㅇ
     [SerializeField]
-    private AudioSource getStarSound;		// 별 먹는 소리
+    private AudioSource useItemSound;		// 아이템 사용 소리 ㅇ
+    [SerializeField]
+    private AudioSource getStarSound;		// 별 먹는 소리 ㅇ
 
 
     void Awake()
@@ -175,11 +177,13 @@ public class Ball : MonoBehaviour
 		{//이 상태에서는 아이템을 사용
 			if (Item == "JumpItem") //점프아이템
 			{
-				UpJump();
+				useItemSound.Play();	// 아이템 사용 소리
+                UpJump();
 			}
 			if (Item == "DashItem") //대쉬아이템
 			{
-				if (rigidbody2D.velocity.x > 0)
+                useItemSound.Play();    // 아이템 사용 소리
+                if (rigidbody2D.velocity.x > 0)
 				{
 					rigidbody2D.AddForce(new Vector2(dashSpeed, 0f), ForceMode2D.Force);
 				}
@@ -190,7 +194,8 @@ public class Ball : MonoBehaviour
 			}
 			if (Item == "WarpItem") //워프아이템
 			{
-				Vector2 px = gameObject.transform.localPosition;
+                useItemSound.Play();    // 아이템 사용 소리
+                Vector2 px = gameObject.transform.localPosition;
 				if (rigidbody2D.velocity.x > 0)
 				{
 					px.x = px.x + 3;
@@ -203,7 +208,8 @@ public class Ball : MonoBehaviour
 			}
 			if (Item == "ForwardItem") //직진아이템
 			{
-				if (rigidbody2D.velocity.x > 0)
+                useItemSound.Play();    // 아이템 사용 소리
+                if (rigidbody2D.velocity.x > 0)
 				{
 					rigidbody2D.gravityScale = 0f;
 					direction = "right";
@@ -220,7 +226,8 @@ public class Ball : MonoBehaviour
 		}
 		else if(c_p==true && c_i==false)//아이템x 체크포인트 o
 		{
-			GameObject back = GameObject.Find("comeBack");
+            useItemSound.Play();    // 아이템 사용 소리
+            GameObject back = GameObject.Find("comeBack");
 			this.transform.position = checkPoint;
 			back.SetActive(false);
 			anime.SetBool("ccc", false);
