@@ -25,6 +25,58 @@ public class StageMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Stage03");
     }
+    public void Stage04()
+    {
+        SceneManager.LoadScene("Stage04");
+    }
+    public void Stage05()
+    {
+        SceneManager.LoadScene("Stage05");
+    }
+    public void Stage06()
+    {
+        SceneManager.LoadScene("Stage06");
+    }
+    public void Stage07()
+    {
+        SceneManager.LoadScene("Stage07");
+    }
+    public void Stage08()
+    {
+        SceneManager.LoadScene("Stage08");
+    }
+    public void Stage09()
+    {
+        SceneManager.LoadScene("Stage09");
+    }
+    public void Stage10()
+    {
+        SceneManager.LoadScene("Stage10");
+    }
+    public void Stage11()
+    {
+        SceneManager.LoadScene("Stage11");
+    }
+    public void Stage12()
+    {
+        SceneManager.LoadScene("Stage12");
+    }
+    public void Stage13()
+    {
+        SceneManager.LoadScene("Stage13");
+    }
+    public void Stage14()
+    {
+        SceneManager.LoadScene("Stage14");
+    }
+    public void Stage15()
+    {
+        SceneManager.LoadScene("Stage15");
+    }
+    public void Stage16()
+    {
+        SceneManager.LoadScene("Stage16");
+    }
     public void TestStage1()
     {
         SceneManager.LoadScene("TestScene");
