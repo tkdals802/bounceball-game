@@ -23,6 +23,8 @@ public class Ball : MonoBehaviour
     private Animator anime; //애니메이션 
     private bool c_p;//체크포인트 bool
     private bool c_i;//아이템 먹었는지 체크 bool
+    private AudioSource audioSource;
+    private AudioClip clip;
     
 
     void Awake()
@@ -30,7 +32,9 @@ public class Ball : MonoBehaviour
         rigidbody2D = this.GetComponent<Rigidbody2D>();
         transform = this.GetComponent<Transform>();
         sr = this.GetComponent<SpriteRenderer>();
-        anime = GetComponent<Animator>();      
+        anime = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        clip = GetComponent<AudioClip>();
         normal_jump = 800f;
         up_jump = 1200f;
         m_fSpeed = 500f;
@@ -192,6 +196,7 @@ public class Ball : MonoBehaviour
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
             //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
             rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
+            audioSource.PlayOneShot(clip);
         }
         if(collision.gameObject.CompareTag("UpBlock"))
         {
