@@ -19,6 +19,10 @@ TagManager:
   - ForwardItem
   - Forward
   - CheckPoint
+  - Destroy_R_F
+  - Destroy_L_F
+  - normal
+  - Destroy_Jump
   layers:
   - Default
   - TransparentFX
