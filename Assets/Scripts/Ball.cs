@@ -301,7 +301,7 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Destroy_L_F")) //부서지는 왼쪽직진블록
         {
             destroySound.Play();		// 소멸블럭 부서지는 소리
-            GoForward("right");
+            GoForward("left");
             GameObject collideObject = collision.gameObject;
             Destroy(collideObject);
             GameObject B_destroyClone = Instantiate(B_destroyEffectPrefab);
@@ -310,7 +310,7 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Destroy_R_F")) //부서지는 오른쪽직진블록
         {
             destroySound.Play();		// 소멸블럭 부서지는 소리
-            GoForward("left");
+            GoForward("right");
             GameObject collideObject = collision.gameObject;
             Destroy(collideObject);
             GameObject B_destroyClone = Instantiate(B_destroyEffectPrefab);
