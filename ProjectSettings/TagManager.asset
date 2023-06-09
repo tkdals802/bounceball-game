@@ -53,6 +53,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: background
+    uniqueID: 1162867789
+    locked: 0
   - name: comeBack
     uniqueID: 1265742875
     locked: 0
