@@ -234,6 +234,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 90e93950561ac0649b34706841ad58d1, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &159591826 stripped
@@ -352,6 +360,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7f4633600b8495f4b93e6376f9dd2831, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &159790342 stripped
@@ -522,6 +538,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6c3045b13f409ae458f849cc210b89bb, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &182788956 stripped
@@ -708,6 +732,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f5fa5a178c0809243abebb16bc84a2ed, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &230000574 stripped
@@ -826,6 +858,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0eb301e220b9ea44cbccca7d4ad43dce, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &277018748 stripped
@@ -1028,6 +1068,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d1a871f6b743c364f887c977a9c54250, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &484130975 stripped
@@ -1595,6 +1643,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dc30acb5649dd3c45aa4e965dbe7d7e7, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &1081217087 stripped
@@ -1713,6 +1769,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 191c3c60cbc8fc546bdd401d393eb502, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &1170146631 stripped
@@ -1965,6 +2029,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c3a9157c36eaea7458a6530e0d494fa1, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &1291344608 stripped
@@ -2083,6 +2155,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 26332862dfb30e04f808c38f343bee33, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &1508612462 stripped
@@ -2201,6 +2281,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 95441e9be26e7bc40a5101f3e28f4aeb, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &1594030101 stripped
@@ -2319,6 +2407,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b8150ad140633ef4a83409e2273cda7e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &1663961340 stripped
@@ -2437,6 +2533,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ef67099b2369d714cb19307d4c8f31a1, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &1684567342 stripped
@@ -2695,6 +2799,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c0b376f76c978954581be85b81afdf71, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &2019830569 stripped
@@ -2813,6 +2925,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eaa901d3f0e92dd429ba76ecf1f30117, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
 --- !u!224 &2031312354 stripped
@@ -3000,5 +3120,13 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StageMenu, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381845239548228171, guid: 83e9b47b290bf6042920483762e7618e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fd8a642e8b1d36b4687c97162e1f7e63, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83e9b47b290bf6042920483762e7618e, type: 3}

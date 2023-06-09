@@ -23,6 +23,7 @@ TagManager:
   - Destroy_L_F
   - normal
   - Destroy_Jump
+  - whitehole
   layers:
   - Default
   - TransparentFX
