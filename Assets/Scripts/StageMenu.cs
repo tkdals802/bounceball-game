@@ -7,7 +7,13 @@ public class StageMenu : MonoBehaviour
     // Start is called before the first frame update
     
     
-    
+    public void LoadNextScene()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        int curScene = scene.buildIndex;
+        int nextScene = curScene+1;
+        SceneManager.LoadScene(nextScene);
+    }
     public void backToSelectMenu()
     {
         SceneManager.LoadScene("SelectStage"); //게임 끝나고 맵선택버튼누를시 다시 맵을 고르게함 

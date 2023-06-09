@@ -23,6 +23,7 @@ public class Ball : MonoBehaviour
     private Animator anime; //애니메이션 
     private bool c_p;//체크포인트 bool
     private bool c_i;//아이템 먹었는지 체크 bool
+
     
 
     void Awake()
@@ -34,7 +35,7 @@ public class Ball : MonoBehaviour
         normal_jump = 800f;
         up_jump = 1200f;
         m_fSpeed = 500f;
-        dashSpeed = 800f;
+        dashSpeed = 450f;
 
     }
 
@@ -252,13 +253,13 @@ public class Ball : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Destroy_L_F")) //부서지는 왼쪽직진블록
         {
-            GoForward("right");
+            GoForward("left");
             GameObject collideObject = collision.gameObject;
             Destroy(collideObject);
         }
         if (collision.gameObject.CompareTag("Destroy_R_F")) //부서지는 오른쪽직진블록
         {
-            GoForward("left");
+            GoForward("right");
             GameObject collideObject = collision.gameObject;
             Destroy(collideObject);
         }
