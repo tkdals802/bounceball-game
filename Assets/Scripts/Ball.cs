@@ -127,12 +127,21 @@ public class Ball : MonoBehaviour
 
         if (rigidbody2D.velocity.x > 0f)
         {
-            rigidbody2D.AddForce(new Vector2(-2f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+            rigidbody2D.AddForce(new Vector2(-1.5f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
         }
         else if (rigidbody2D.velocity.x < 0f)
         {
-            rigidbody2D.AddForce(new Vector2(2f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+            rigidbody2D.AddForce(new Vector2(1.5f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
         }
+        /*
+        if (rigidbody2D.velocity.y < 0f)
+        {
+            rigidbody2D.AddForce(new Vector2(0f, -5f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+        }
+        else
+        {
+            rigidbody2D.AddForce(new Vector2(0f, -5f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+        }*/
 
         Debug.Log("체크" + c_p + c_i);
     }
@@ -155,7 +164,7 @@ public class Ball : MonoBehaviour
 
     private void GoForward(string dir, GameObject collideObject)
     {
-        rigidbody2D.sharedMaterial.friction = 0;
+        //rigidbody2D.sharedMaterial.friction = 0;
         if (dir == "right")
         {
             Vector2 ps = collideObject.transform.position;
