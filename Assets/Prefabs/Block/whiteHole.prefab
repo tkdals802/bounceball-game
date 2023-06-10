@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5238110232334453246}
   - component: {fileID: 5238110232334453247}
   m_Layer: 0
-  m_Name: whiteHole1
+  m_Name: whiteHole
   m_TagString: whitehole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
