@@ -400,7 +400,7 @@ public class Ball : MonoBehaviour
         if (other.CompareTag("BlackHole"))
         {
             blackholeSound.Play();		// 블랙홀 소리
-            gameObject.transform.position = other.transform.Find("whiteHole1").gameObject.transform.position;
+            gameObject.transform.position = other.transform.Find("whiteHole").gameObject.transform.position;
         }
     }
 
