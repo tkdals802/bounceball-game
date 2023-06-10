@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -71,6 +72,7 @@ public class Ball : MonoBehaviour
         //dashSpeed = 450f;
         //gravity = 3f;
         mainCamera = Camera.main;
+        
 
     }
 
@@ -143,7 +145,6 @@ public class Ball : MonoBehaviour
     private void Normaljump() //노멀블럭에서의 점프
     {
         rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
-        //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
         rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
     }
     private void UpJump() //상승점프
@@ -159,6 +160,7 @@ public class Ball : MonoBehaviour
 
     private void GoForward(string dir)
     {
+        rigidbody2D.sharedMaterial.friction = 0;
         if (dir == "right")
         {
             Vector2 ps = gameObject.transform.position;
@@ -195,14 +197,19 @@ public class Ball : MonoBehaviour
             }
             if (Item == "DashItem") //대쉬아이템
             {
+                float mass = GetComponent<Rigidbody2D>().mass;
+                float v_x = rigidbody2D.velocity.x;
+                float v_y = rigidbody2D.velocity.y;
+
+                float F = mass * v_y;
                 useItemSound.Play();    // 아이템 사용 소리
                 if (rigidbody2D.velocity.x > 0)
                 {
-                    rigidbody2D.AddForce(new Vector2(dashSpeed, 0f), ForceMode2D.Force);
+                    rigidbody2D.AddForce(new Vector2(dashSpeed, -F + 400), ForceMode2D.Force);
                 }
                 else
                 {
-                    rigidbody2D.AddForce(new Vector2(-1 * dashSpeed, 0f), ForceMode2D.Force);
+                    rigidbody2D.AddForce(new Vector2(-1 * dashSpeed, -F + 400), ForceMode2D.Force);
                 }
             }
             if (Item == "WarpItem") //워프아이템
