@@ -164,7 +164,7 @@ public class Ball : MonoBehaviour
         if (dir == "right")
         {
             Vector2 ps = gameObject.transform.position;
-            ps.x += 1f;
+            ps.x += 2f;
             ps.y += -1.0f;
             gameObject.transform.position = ps;//collision.transform.position;
             rigidbody2D.gravityScale = 0f;
@@ -174,7 +174,7 @@ public class Ball : MonoBehaviour
         else if (dir == "left")
         {
             Vector2 ps = gameObject.transform.position;
-            ps.x += -1.0f;
+            ps.x += -2.0f;
             ps.y += -1.0f;
             gameObject.transform.localPosition = ps;
             rigidbody2D.gravityScale = 0f;
