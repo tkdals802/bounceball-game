@@ -169,7 +169,6 @@ public class Ball : MonoBehaviour
 
     private void GoForward(string dir)
     {
-        //rigidbody2D.sharedMaterial.friction = 0;
         if (dir == "right")
         {
             Vector2 ps = gameObject.transform.position;
