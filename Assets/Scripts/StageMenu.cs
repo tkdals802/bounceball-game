@@ -6,7 +6,6 @@ public class StageMenu : MonoBehaviour
 {
     // Start is called before the first frame update
     
-    
     public void LoadNextScene()
     {
         Scene scene = SceneManager.GetActiveScene();

@@ -2419,6 +2419,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2759829409995139650, guid: 6cb764f02ad4e094cae2b57636b00400, type: 3}
+      propertyPath: ballSpeed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2759829409995139652, guid: 6cb764f02ad4e094cae2b57636b00400, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3802,7 +3806,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5238110232334453232, guid: 94d1c6f3115355045a66b5cded96f590, type: 3}
       propertyPath: m_Name
-      value: whiteHole1
+      value: whiteHole
       objectReference: {fileID: 0}
     - target: {fileID: 5238110232334453246, guid: 94d1c6f3115355045a66b5cded96f590, type: 3}
       propertyPath: m_RootOrder

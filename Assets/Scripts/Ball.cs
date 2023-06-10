@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+
     new Rigidbody2D rigidbody2D;
     new Transform transform;
     [SerializeField]
@@ -26,6 +27,7 @@ public class Ball : MonoBehaviour
     private bool c_p;//체크포인트 bool
     private bool c_i;//아이템 먹었는지 체크 bool
     private Camera mainCamera;
+    private string keymemory;
 
     //이펙트
     [SerializeField]
@@ -68,6 +70,8 @@ public class Ball : MonoBehaviour
         anime = GetComponent<Animator>();
         mainCamera = Camera.main;
         rigidbody2D.gravityScale = gravity;
+        
+        
     }
 
     void Start()
@@ -90,14 +94,20 @@ public class Ball : MonoBehaviour
         if (viewportPosition.y < 0) //떨어진경우 다시 원점으로 복귀
         {
             ballBurstSound.Play();  // 공 터지는 소리
+            
             SceneLoad();
             GameObject ballClone = Instantiate(ballEffectPrefab);
             ballClone.transform.position = this.transform.position;//죽는 위치 공 이펙트 발현
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            rollBack();
+            keymemory = "left";
+            if (fly == true)
+            {
+                rollBack();
+            }
             rigidbody2D.velocity = new Vector2(-1 * ballSpeed, rigidbody2D.velocity.y);
+            
             //if (rigidbody2D.velocity.x > -4f)
             //{
             //    rigidbody2D.AddForce(new Vector2(-1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
@@ -105,7 +115,12 @@ public class Ball : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            rollBack();
+            keymemory = "right";
+            if (fly == true)
+            {
+                rollBack();
+            }
+            
             rigidbody2D.velocity = new Vector2(ballSpeed, rigidbody2D.velocity.y);
             //if (rigidbody2D.velocity.x < 4f)
             //{
@@ -130,17 +145,7 @@ public class Ball : MonoBehaviour
         {
             rigidbody2D.AddForce(new Vector2(1.5f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
         }
-        /*
-        if (rigidbody2D.velocity.y < 0f)
-        {
-            rigidbody2D.AddForce(new Vector2(0f, -5f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
-        }
-        else
-        {
-            rigidbody2D.AddForce(new Vector2(0f, -5f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
-        }*/
-
-        Debug.Log("체크" + c_p + c_i);
+        
     }
 
     private void Normaljump() //노멀블럭에서의 점프
@@ -161,7 +166,6 @@ public class Ball : MonoBehaviour
 
     private void GoForward(string dir, GameObject collideObject)
     {
-        //rigidbody2D.sharedMaterial.friction = 0;
         if (dir == "right")
         {
             Vector2 ps = collideObject.transform.position;
@@ -196,12 +200,12 @@ public class Ball : MonoBehaviour
             if (Item == "DashItem") //대쉬아이템
             {
                 useItemSound.Play();    // 아이템 사용 소리
-                if (rigidbody2D.velocity.x >= 0)
+                if (keymemory=="right")
                 {
                     rigidbody2D.velocity = new Vector2(0, 0);
                     rigidbody2D.AddForce(new Vector2(1100, 400), ForceMode2D.Force);
                 }
-                else
+                else if(keymemory=="left")
                 {
                     rigidbody2D.velocity = new Vector2(0, 0);
                     rigidbody2D.AddForce(new Vector2(-1100, 400), ForceMode2D.Force);
@@ -211,11 +215,11 @@ public class Ball : MonoBehaviour
             {
                 useItemSound.Play();    // 아이템 사용 소리
                 Vector2 px = gameObject.transform.localPosition;
-                if (rigidbody2D.velocity.x > 0)
+                if (keymemory == "right")
                 {
                     px.x = px.x + 3;
                 }
-                else
+                else if(keymemory == "left")
                 {
                     px.x = px.x - 3;
                 }
@@ -224,13 +228,13 @@ public class Ball : MonoBehaviour
             if (Item == "ForwardItem") //직진아이템
             {
                 useItemSound.Play();    // 아이템 사용 소리
-                if (rigidbody2D.velocity.x > 0)
+                if (keymemory == "right")
                 {
                     rigidbody2D.gravityScale = 0f;
                     direction = "right";
                     fly = true;
                 }
-                else
+                else if (keymemory == "left")
                 {
                     rigidbody2D.gravityScale = 0f;
                     direction = "left";
@@ -256,6 +260,8 @@ public class Ball : MonoBehaviour
     {
         fly = false;
         rigidbody2D.gravityScale = gravity;
+        
+        rigidbody2D.velocity = new Vector2(0, 0);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -385,7 +391,7 @@ public class Ball : MonoBehaviour
         if (other.CompareTag("BlackHole"))
         {
             blackholeSound.Play();		// 블랙홀 소리
-            gameObject.transform.position = other.transform.Find("whiteHole1").gameObject.transform.position;
+            gameObject.transform.position = other.transform.Find("whiteHole").gameObject.transform.position;
         }
     }
 }
