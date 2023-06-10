@@ -13,10 +13,10 @@ public class Ball : MonoBehaviour
     private bool fly = false; //직진블록만나면 true 아니면 false
     private string direction = "";// 오른쪽직진인지 왼쪽직진인지 
 
+    public float ballSpeed;
     public float m_fSpeed;
     public float normal_jump; //노말블럭에 닿았을때 점프력
     public float up_jump; //상승블럭 혹은 점프 아이템을 사용했을때 높이
-    public float dashSpeed;
     public float gravity;
     public string Item; //무슨 아이템을 먹었는지 식별
                         //public bool hasItem; //아이템을 끼고있으면 True 아니면 False
@@ -66,14 +66,8 @@ public class Ball : MonoBehaviour
         transform = this.GetComponent<Transform>();
         sr = this.GetComponent<SpriteRenderer>();
         anime = GetComponent<Animator>();
-        //m_fSpeed = 500f;
-        //normal_jump = 800f;
-        //up_jump = 1200f;
-        //dashSpeed = 450f;
-        //gravity = 3f;
         mainCamera = Camera.main;
-        
-
+        rigidbody2D.gravityScale = gravity;
     }
 
     void Start()
@@ -83,7 +77,6 @@ public class Ball : MonoBehaviour
     }
     void Update()
     {
-
         if (fly)
         {
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
@@ -104,19 +97,20 @@ public class Ball : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             rollBack();
-            if (rigidbody2D.velocity.x > -4f)
-            {
-                rigidbody2D.AddForce(new Vector2(-1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
-            }
-
+            rigidbody2D.velocity = new Vector2(-1 * ballSpeed, rigidbody2D.velocity.y);
+            //if (rigidbody2D.velocity.x > -4f)
+            //{
+            //    rigidbody2D.AddForce(new Vector2(-1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
+            //}
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
             rollBack();
-            if (rigidbody2D.velocity.x < 4f)
-            {
-                rigidbody2D.AddForce(new Vector2(1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
-            }
+            rigidbody2D.velocity = new Vector2(ballSpeed, rigidbody2D.velocity.y);
+            //if (rigidbody2D.velocity.x < 4f)
+            //{
+            //    rigidbody2D.AddForce(new Vector2(1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
+            //}
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -125,7 +119,6 @@ public class Ball : MonoBehaviour
             {
                 useItem();
                 sr.color = new Color(1.0f, 1.0f, 0, 1.0f);
-
             }
         }
 
@@ -148,7 +141,6 @@ public class Ball : MonoBehaviour
         }*/
 
         Debug.Log("체크" + c_p + c_i);
-
     }
 
     private void Normaljump() //노멀블럭에서의 점프
@@ -167,13 +159,12 @@ public class Ball : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.name);//Scene reload
     }
 
-    private void GoForward(string dir)
+    private void GoForward(string dir, GameObject collideObject)
     {
         if (dir == "right")
         {
-            Vector2 ps = gameObject.transform.position;
-            ps.x += 2f;
-            ps.y += -1.0f;
+            Vector2 ps = collideObject.transform.position;
+            ps.x += 1f;
             gameObject.transform.position = ps;//collision.transform.position;
             rigidbody2D.gravityScale = 0f;
             direction = "right";
@@ -181,15 +172,13 @@ public class Ball : MonoBehaviour
         }
         else if (dir == "left")
         {
-            Vector2 ps = gameObject.transform.position;
-            ps.x += -2.0f;
-            ps.y += -1.0f;
+            Vector2 ps = collideObject.transform.position;
+            ps.x += -1f;
             gameObject.transform.localPosition = ps;
             rigidbody2D.gravityScale = 0f;
             direction = "left";
             fly = true;
         }
-
     }
 
     //본인이 만든 아이템 로직을 여기다가 구현 
@@ -205,19 +194,16 @@ public class Ball : MonoBehaviour
             }
             if (Item == "DashItem") //대쉬아이템
             {
-                float mass = GetComponent<Rigidbody2D>().mass;
-                float v_x = rigidbody2D.velocity.x;
-                float v_y = rigidbody2D.velocity.y;
-
-                float F = mass * v_y;
                 useItemSound.Play();    // 아이템 사용 소리
-                if (rigidbody2D.velocity.x > 0)
+                if (rigidbody2D.velocity.x >= 0)
                 {
-                    rigidbody2D.AddForce(new Vector2(dashSpeed, 0), ForceMode2D.Force);
+                    rigidbody2D.velocity = new Vector2(0, 0);
+                    rigidbody2D.AddForce(new Vector2(1100, 400), ForceMode2D.Force);
                 }
                 else
                 {
-                    rigidbody2D.AddForce(new Vector2(dashSpeed, 0), ForceMode2D.Force);
+                    rigidbody2D.velocity = new Vector2(0, 0);
+                    rigidbody2D.AddForce(new Vector2(-1100, 400), ForceMode2D.Force);
                 }
             }
             if (Item == "WarpItem") //워프아이템
@@ -261,7 +247,6 @@ public class Ball : MonoBehaviour
             anime.SetBool("ccc", false);
             c_p = false;
         }
-
     }
 
 
@@ -300,18 +285,20 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("RightForwardBlock"))
         {
             forwardBlockSound.Play();   // 직진블럭 소리
-            GoForward("right");
+            GameObject collideObject = collision.gameObject;
+            GoForward("right", collideObject);
         }
         if (collision.gameObject.CompareTag("LeftForwardBlock"))
         {
             forwardBlockSound.Play();   // 직진블럭 소리
-            GoForward("left");
+            GameObject collideObject = collision.gameObject;
+            GoForward("left", collideObject);
         }
         if (collision.gameObject.CompareTag("Destroy_L_F")) //부서지는 왼쪽직진블록
         {
             destroySound.Play();		// 소멸블럭 부서지는 소리
-            GoForward("left");
             GameObject collideObject = collision.gameObject;
+            GoForward("left", collideObject);
             Destroy(collideObject);
             GameObject B_destroyClone = Instantiate(B_destroyEffectPrefab);
             B_destroyClone.transform.position = this.transform.position;//소멸블록 이펙트 발현
@@ -319,8 +306,8 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Destroy_R_F")) //부서지는 오른쪽직진블록
         {
             destroySound.Play();		// 소멸블럭 부서지는 소리
-            GoForward("right");
             GameObject collideObject = collision.gameObject;
+            GoForward("right", collideObject);
             Destroy(collideObject);
             GameObject B_destroyClone = Instantiate(B_destroyEffectPrefab);
             B_destroyClone.transform.position = this.transform.position;//소멸블록 이펙트 발현
@@ -341,8 +328,6 @@ public class Ball : MonoBehaviour
             rigidbody2D.AddForce(new Vector2(-1 * v, 0f));
 
         }
-
-
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -402,8 +387,4 @@ public class Ball : MonoBehaviour
             gameObject.transform.position = other.transform.Find("whiteHole").gameObject.transform.position;
         }
     }
-
-
-
-
 }
