@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+
     new Rigidbody2D rigidbody2D;
     new Transform transform;
     [SerializeField]
@@ -69,6 +70,8 @@ public class Ball : MonoBehaviour
         anime = GetComponent<Animator>();
         mainCamera = Camera.main;
         rigidbody2D.gravityScale = gravity;
+        
+        
     }
 
     void Start()
@@ -91,6 +94,7 @@ public class Ball : MonoBehaviour
         if (viewportPosition.y < 0) //떨어진경우 다시 원점으로 복귀
         {
             ballBurstSound.Play();  // 공 터지는 소리
+            
             SceneLoad();
             GameObject ballClone = Instantiate(ballEffectPrefab);
             ballClone.transform.position = this.transform.position;//죽는 위치 공 이펙트 발현
@@ -197,7 +201,6 @@ public class Ball : MonoBehaviour
             {
                 useItemSound.Play();    // 아이템 사용 소리
                 if (keymemory=="right")
-                //if (rigidbody2D.velocity.x >= 0)
                 {
                     rigidbody2D.velocity = new Vector2(0, 0);
                     rigidbody2D.AddForce(new Vector2(1100, 400), ForceMode2D.Force);
@@ -225,13 +228,13 @@ public class Ball : MonoBehaviour
             if (Item == "ForwardItem") //직진아이템
             {
                 useItemSound.Play();    // 아이템 사용 소리
-                if (rigidbody2D.velocity.x > 0)
+                if (keymemory == "right")
                 {
                     rigidbody2D.gravityScale = 0f;
                     direction = "right";
                     fly = true;
                 }
-                else
+                else if (keymemory == "left")
                 {
                     rigidbody2D.gravityScale = 0f;
                     direction = "left";
