@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lg: {fileID: 8269707233242420076, guid: eedd7a2399e79c44382c946890c48148, type: 3}
-  ballSpeed: 10
+  ballSpeed: 7
   m_fSpeed: 500
   normal_jump: 800
   up_jump: 1000
