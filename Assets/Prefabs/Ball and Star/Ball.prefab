@@ -134,9 +134,8 @@ MonoBehaviour:
   lg: {fileID: 8269707233242420076, guid: eedd7a2399e79c44382c946890c48148, type: 3}
   m_fSpeed: 500
   normal_jump: 800
-  up_jump: 1200
-  dashSpeed: 400
-  gravity: 3
+  up_jump: 1000
+  gravity: 6
   Item: 
   start: {fileID: 0}
   checkPoint: {x: 0, y: 0}
