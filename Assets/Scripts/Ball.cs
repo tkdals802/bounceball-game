@@ -13,6 +13,7 @@ public class Ball : MonoBehaviour
     private bool fly = false; //직진블록만나면 true 아니면 false
     private string direction = "";// 오른쪽직진인지 왼쪽직진인지 
 
+    public float ballSpeed;
     public float m_fSpeed;
     public float normal_jump; //노말블럭에 닿았을때 점프력
     public float up_jump; //상승블럭 혹은 점프 아이템을 사용했을때 높이
@@ -65,10 +66,6 @@ public class Ball : MonoBehaviour
         transform = this.GetComponent<Transform>();
         sr = this.GetComponent<SpriteRenderer>();
         anime = GetComponent<Animator>();
-        //m_fSpeed = 500f;
-        //normal_jump = 800f;
-        //up_jump = 1200f;
-        //gravity = 3f;
         mainCamera = Camera.main;
         rigidbody2D.gravityScale = gravity;
     }
@@ -100,7 +97,7 @@ public class Ball : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             rollBack();
-            rigidbody2D.velocity = new Vector2(-8f, rigidbody2D.velocity.y);
+            rigidbody2D.velocity = new Vector2(-1 * ballSpeed, rigidbody2D.velocity.y);
             //if (rigidbody2D.velocity.x > -4f)
             //{
             //    rigidbody2D.AddForce(new Vector2(-1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
@@ -109,7 +106,7 @@ public class Ball : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             rollBack();
-            rigidbody2D.velocity = new Vector2(8f, rigidbody2D.velocity.y);
+            rigidbody2D.velocity = new Vector2(ballSpeed, rigidbody2D.velocity.y);
             //if (rigidbody2D.velocity.x < 4f)
             //{
             //    rigidbody2D.AddForce(new Vector2(1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
