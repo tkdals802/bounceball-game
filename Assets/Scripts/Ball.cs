@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -67,8 +68,9 @@ public class Ball : MonoBehaviour
         normal_jump = 800f;
         up_jump = 1200f;
         m_fSpeed = 500f;
-        dashSpeed = 450f;
+        dashSpeed = 500f;
         mainCamera = Camera.main;
+        
 
     }
 
@@ -164,6 +166,7 @@ public class Ball : MonoBehaviour
 
     private void GoForward(string dir)
     {
+        rigidbody2D.sharedMaterial.friction = 0;
         if (dir == "right")
         {
             Vector2 ps = gameObject.transform.position;
@@ -200,14 +203,19 @@ public class Ball : MonoBehaviour
             }
             if (Item == "DashItem") //대쉬아이템
             {
+                float mass = GetComponent<Rigidbody2D>().mass;
+                float v_x = rigidbody2D.velocity.x;
+                float v_y = rigidbody2D.velocity.y;
+
+                float F = mass * v_y;
                 useItemSound.Play();    // 아이템 사용 소리
                 if (rigidbody2D.velocity.x > 0)
                 {
-                    rigidbody2D.AddForce(new Vector2(dashSpeed, 0f), ForceMode2D.Force);
+                    rigidbody2D.AddForce(new Vector2(dashSpeed, -F + 400), ForceMode2D.Force);
                 }
                 else
                 {
-                    rigidbody2D.AddForce(new Vector2(-1 * dashSpeed, 0f), ForceMode2D.Force);
+                    rigidbody2D.AddForce(new Vector2(-1 * dashSpeed, -F + 400), ForceMode2D.Force);
                 }
             }
             if (Item == "WarpItem") //워프아이템
@@ -260,6 +268,7 @@ public class Ball : MonoBehaviour
     {
         fly = false;
         rigidbody2D.gravityScale = 1f;
+        rigidbody2D.sharedMaterial.friction = 0.6f;
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
