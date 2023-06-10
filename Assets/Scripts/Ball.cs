@@ -144,10 +144,10 @@ public class Ball : MonoBehaviour
         rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
         rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
     }
-    private void UpJump() //상승점프
+    private void UpJump(float x) //상승점프
     {
         rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
-        rigidbody2D.AddForce(new Vector2(0f, up_jump), ForceMode2D.Force);
+        rigidbody2D.AddForce(new Vector2(0f, x), ForceMode2D.Force);
     }
 
     private void SceneLoad()
@@ -186,7 +186,7 @@ public class Ball : MonoBehaviour
             if (Item == "JumpItem") //점프아이템
             {
                 useItemSound.Play();    // 아이템 사용 소리
-                UpJump();
+                UpJump(750f);
             }
             if (Item == "DashItem") //대쉬아이템
             {
@@ -272,7 +272,7 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("UpBlock"))
         {
             upBlockSound.Play();    // 상승블럭 소리
-            UpJump();
+            UpJump(up_jump);
         }
         if (collision.gameObject.CompareTag("Obstacle"))
         {
@@ -312,7 +312,7 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Destroy_Jump"))
         {
             destroySound.Play();        // 소멸블럭 부서지는 소리
-            UpJump();
+            UpJump(up_jump);
             GameObject collideObject = collision.gameObject;
             Destroy(collideObject);
             GameObject B_destroyClone = Instantiate(B_destroyEffectPrefab);
