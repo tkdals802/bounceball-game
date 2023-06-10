@@ -131,11 +131,11 @@ public class Ball : MonoBehaviour
 
         if (rigidbody2D.velocity.x > 0f)
         {
-            rigidbody2D.AddForce(new Vector2(-1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+            rigidbody2D.AddForce(new Vector2(-1.5f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
         }
         else if (rigidbody2D.velocity.x < 0f)
         {
-            rigidbody2D.AddForce(new Vector2(1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+            rigidbody2D.AddForce(new Vector2(1.5f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
         }
         /*
         if (rigidbody2D.velocity.y < 0f)
@@ -169,7 +169,7 @@ public class Ball : MonoBehaviour
 
     private void GoForward(string dir)
     {
-        rigidbody2D.sharedMaterial.friction = 0;
+        //rigidbody2D.sharedMaterial.friction = 0;
         if (dir == "right")
         {
             Vector2 ps = gameObject.transform.position;
