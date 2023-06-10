@@ -26,6 +26,7 @@ public class Ball : MonoBehaviour
     private bool c_p;//체크포인트 bool
     private bool c_i;//아이템 먹었는지 체크 bool
     private Camera mainCamera;
+    private string keymemory;
 
     //이펙트
     [SerializeField]
@@ -96,6 +97,7 @@ public class Ball : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
+            keymemory = "left";
             if (fly == true)
             {
                 rollBack();
@@ -108,6 +110,7 @@ public class Ball : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
+            keymemory = "right";
             if (fly == true)
             {
                 rollBack();
@@ -191,12 +194,13 @@ public class Ball : MonoBehaviour
             if (Item == "DashItem") //대쉬아이템
             {
                 useItemSound.Play();    // 아이템 사용 소리
-                if (rigidbody2D.velocity.x >= 0)
+                if (keymemory=="right")
+                //if (rigidbody2D.velocity.x >= 0)
                 {
                     rigidbody2D.velocity = new Vector2(0, 0);
                     rigidbody2D.AddForce(new Vector2(1100, 400), ForceMode2D.Force);
                 }
-                else
+                else if(keymemory=="left")
                 {
                     rigidbody2D.velocity = new Vector2(0, 0);
                     rigidbody2D.AddForce(new Vector2(-1100, 400), ForceMode2D.Force);
@@ -206,11 +210,11 @@ public class Ball : MonoBehaviour
             {
                 useItemSound.Play();    // 아이템 사용 소리
                 Vector2 px = gameObject.transform.localPosition;
-                if (rigidbody2D.velocity.x > 0)
+                if (keymemory == "right")
                 {
                     px.x = px.x + 3;
                 }
-                else
+                else if(keymemory == "left")
                 {
                     px.x = px.x - 3;
                 }
