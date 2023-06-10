@@ -17,6 +17,7 @@ public class Ball : MonoBehaviour
     public float normal_jump; //노말블럭에 닿았을때 점프력
     public float up_jump; //상승블럭 혹은 점프 아이템을 사용했을때 높이
     public float dashSpeed;
+    public float gravity;
     public string Item; //무슨 아이템을 먹었는지 식별
                         //public bool hasItem; //아이템을 끼고있으면 True 아니면 False
     public GameObject start;
@@ -65,10 +66,11 @@ public class Ball : MonoBehaviour
         transform = this.GetComponent<Transform>();
         sr = this.GetComponent<SpriteRenderer>();
         anime = GetComponent<Animator>();
-        normal_jump = 800f;
-        up_jump = 1200f;
-        m_fSpeed = 500f;
-        dashSpeed = 500f;
+        //m_fSpeed = 500f;
+        //normal_jump = 800f;
+        //up_jump = 1200f;
+        //dashSpeed = 450f;
+        //gravity = 3f;
         mainCamera = Camera.main;
         
 
@@ -84,10 +86,11 @@ public class Ball : MonoBehaviour
 
         if (fly)
         {
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0);
             if (direction == "right")
-                rigidbody2D.velocity = new Vector2(10f, 1f);
+                rigidbody2D.velocity = new Vector2(10f, 0f);
             else if (direction == "left")
-                rigidbody2D.velocity = new Vector2(-10f, 1f);
+                rigidbody2D.velocity = new Vector2(-10f, 0f);
         }
         Vector2 viewportPosition = mainCamera.WorldToViewportPoint(transform.position);
 
@@ -128,20 +131,11 @@ public class Ball : MonoBehaviour
 
         if (rigidbody2D.velocity.x > 0f)
         {
-            rigidbody2D.AddForce(new Vector2(-0.5f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+            rigidbody2D.AddForce(new Vector2(-2f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
         }
         else if (rigidbody2D.velocity.x < 0f)
         {
-            rigidbody2D.AddForce(new Vector2(0.5f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
-        }
-
-        if (rigidbody2D.velocity.y < 0f)
-        {
-            rigidbody2D.AddForce(new Vector2(0f, -5f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
-        }
-        else
-        {
-            rigidbody2D.AddForce(new Vector2(0f, -5f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+            rigidbody2D.AddForce(new Vector2(2f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
         }
 
         Debug.Log("체크" + c_p + c_i);
@@ -170,7 +164,7 @@ public class Ball : MonoBehaviour
         if (dir == "right")
         {
             Vector2 ps = gameObject.transform.position;
-            ps.x += 1f;
+            ps.x += 2f;
             ps.y += -1.0f;
             gameObject.transform.position = ps;//collision.transform.position;
             rigidbody2D.gravityScale = 0f;
@@ -180,7 +174,7 @@ public class Ball : MonoBehaviour
         else if (dir == "left")
         {
             Vector2 ps = gameObject.transform.position;
-            ps.x += -1.0f;
+            ps.x += -2.0f;
             ps.y += -1.0f;
             gameObject.transform.localPosition = ps;
             rigidbody2D.gravityScale = 0f;
@@ -267,8 +261,7 @@ public class Ball : MonoBehaviour
     void rollBack() //직진중에 방향키가 입력되면 떨어지게함
     {
         fly = false;
-        rigidbody2D.gravityScale = 1f;
-        rigidbody2D.sharedMaterial.friction = 0.6f;
+        rigidbody2D.gravityScale = gravity;
     }
     void OnCollisionEnter2D(Collision2D collision)
     {

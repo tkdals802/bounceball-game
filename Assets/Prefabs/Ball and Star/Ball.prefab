@@ -132,10 +132,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lg: {fileID: 8269707233242420076, guid: eedd7a2399e79c44382c946890c48148, type: 3}
-  m_fSpeed: 0
-  normal_jump: 0
-  up_jump: 0
-  dashSpeed: 0
+  m_fSpeed: 500
+  normal_jump: 800
+  up_jump: 1200
+  dashSpeed: 400
+  gravity: 3
   Item: 
   start: {fileID: 0}
   checkPoint: {x: 0, y: 0}
