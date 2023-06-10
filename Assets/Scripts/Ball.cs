@@ -103,6 +103,7 @@ public class Ball : MonoBehaviour
                 rollBack();
             }
             rigidbody2D.velocity = new Vector2(-1 * ballSpeed, rigidbody2D.velocity.y);
+            
             //if (rigidbody2D.velocity.x > -4f)
             //{
             //    rigidbody2D.AddForce(new Vector2(-1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Impulse);
@@ -115,6 +116,7 @@ public class Ball : MonoBehaviour
             {
                 rollBack();
             }
+            
             rigidbody2D.velocity = new Vector2(ballSpeed, rigidbody2D.velocity.y);
             //if (rigidbody2D.velocity.x < 4f)
             //{
@@ -255,6 +257,7 @@ public class Ball : MonoBehaviour
     {
         fly = false;
         rigidbody2D.gravityScale = gravity;
+        
         rigidbody2D.velocity = new Vector2(0, 0);
     }
     void OnCollisionEnter2D(Collision2D collision)
