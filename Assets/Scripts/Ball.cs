@@ -149,7 +149,6 @@ public class Ball : MonoBehaviour
     private void Normaljump() //노멀블럭에서의 점프
     {
         rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
-        //Vector3 vector = Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right;
         rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
     }
     private void UpJump() //상승점프
