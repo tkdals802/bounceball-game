@@ -131,12 +131,21 @@ public class Ball : MonoBehaviour
 
         if (rigidbody2D.velocity.x > 0f)
         {
-            rigidbody2D.AddForce(new Vector2(-2f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+            rigidbody2D.AddForce(new Vector2(-1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
         }
         else if (rigidbody2D.velocity.x < 0f)
         {
-            rigidbody2D.AddForce(new Vector2(2f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+            rigidbody2D.AddForce(new Vector2(1f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
         }
+        /*
+        if (rigidbody2D.velocity.y < 0f)
+        {
+            rigidbody2D.AddForce(new Vector2(0f, -5f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+        }
+        else
+        {
+            rigidbody2D.AddForce(new Vector2(0f, -5f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
+        }*/
 
         Debug.Log("체크" + c_p + c_i);
 
@@ -205,11 +214,11 @@ public class Ball : MonoBehaviour
                 useItemSound.Play();    // 아이템 사용 소리
                 if (rigidbody2D.velocity.x > 0)
                 {
-                    rigidbody2D.AddForce(new Vector2(dashSpeed, -F + 400), ForceMode2D.Force);
+                    rigidbody2D.AddForce(new Vector2(dashSpeed, 0), ForceMode2D.Force);
                 }
                 else
                 {
-                    rigidbody2D.AddForce(new Vector2(-1 * dashSpeed, -F + 400), ForceMode2D.Force);
+                    rigidbody2D.AddForce(new Vector2(dashSpeed, 0), ForceMode2D.Force);
                 }
             }
             if (Item == "WarpItem") //워프아이템
