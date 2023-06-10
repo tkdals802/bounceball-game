@@ -96,7 +96,10 @@ public class Ball : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            rollBack();
+            if (fly == true)
+            {
+                rollBack();
+            }
             rigidbody2D.velocity = new Vector2(-1 * ballSpeed, rigidbody2D.velocity.y);
             //if (rigidbody2D.velocity.x > -4f)
             //{
@@ -105,7 +108,10 @@ public class Ball : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            rollBack();
+            if (fly == true)
+            {
+                rollBack();
+            }
             rigidbody2D.velocity = new Vector2(ballSpeed, rigidbody2D.velocity.y);
             //if (rigidbody2D.velocity.x < 4f)
             //{
@@ -130,17 +136,7 @@ public class Ball : MonoBehaviour
         {
             rigidbody2D.AddForce(new Vector2(1.5f, 0f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
         }
-        /*
-        if (rigidbody2D.velocity.y < 0f)
-        {
-            rigidbody2D.AddForce(new Vector2(0f, -5f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
-        }
-        else
-        {
-            rigidbody2D.AddForce(new Vector2(0f, -5f) * Time.deltaTime * m_fSpeed, ForceMode2D.Force);
-        }*/
-
-        Debug.Log("체크" + c_p + c_i);
+        
     }
 
     private void Normaljump() //노멀블럭에서의 점프
@@ -255,6 +251,7 @@ public class Ball : MonoBehaviour
     {
         fly = false;
         rigidbody2D.gravityScale = gravity;
+        rigidbody2D.velocity = new Vector2(0, 0);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
