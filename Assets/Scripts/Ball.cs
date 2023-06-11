@@ -149,25 +149,10 @@ public class Ball : MonoBehaviour
         }
         
     }
-    private void Normaljump1() //노멀블럭에서의 점프
+    private void Normaljump() //노멀블럭에서의 점프
     {
         rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
         rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
-    }
-    private void Normaljump2() //소멸블럭에서의 점프
-    {
-        if (Isnormal_Jump == false)
-        {
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
-            rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
-            Isnormal_Jump = true;
-        }
-        SetBoolAfterDelay();
-    }
-    IEnumerator SetBoolAfterDelay()
-    {
-        yield return new WaitForSeconds(0.001f);
-        Isnormal_Jump = false;
     }
 
     private void UpJump(float x) //상승점프
@@ -286,12 +271,12 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Normal Block"))
         {
             ballSound.Play();       // 공 튀는 소리
-            Normaljump1();
+            Normaljump();
         }
         if (collision.gameObject.CompareTag("Destroy"))
         {
             destroySound.Play();        // 소멸블럭 부서지는 소리
-            Normaljump2();
+            Normaljump();
             GameObject collideObject = collision.gameObject;
             Destroy(collideObject);
             GameObject destroyClone = Instantiate(destroyEffectPrefab);
