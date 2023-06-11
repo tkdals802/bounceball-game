@@ -328,7 +328,7 @@ public class Ball : MonoBehaviour
             GameObject B_destroyClone = Instantiate(B_destroyEffectPrefab);
             B_destroyClone.transform.position = this.transform.position;//소멸블록 이펙트 발현
         }
-        if (collision.gameObject.CompareTag("Untagged"))
+        if (collision.gameObject.CompareTag("Untagged") && fly)
         {
             float v = rigidbody2D.velocity.x;
             rollBack();
