@@ -28,7 +28,7 @@ public class Ball : MonoBehaviour
     private bool c_i;//아이템 먹었는지 체크 bool
     private Camera mainCamera;//카메라 range 알기 위해서
     private string keymemory;//아이템 방향설정
-    private bool Isnormal_Jump = false;
+
 
 
     //이펙트
