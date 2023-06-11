@@ -41,7 +41,7 @@ public class Logic : MonoBehaviour
     }
     private void SceneLoad()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.name);//Scene reload
+        SceneManager.LoadScene(gameObject.scene.name);//Scene reload
     }
     public void DelaySceneLoad()
     {
