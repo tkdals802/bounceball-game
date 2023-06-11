@@ -62,6 +62,7 @@ public class Ball : MonoBehaviour
     private AudioSource useItemSound;		// 아이템 사용 소리
     [SerializeField]
     private AudioSource getStarSound;		// 별 먹는 소리
+    private bool IsDead;
 
 
     void Awake()
@@ -80,6 +81,7 @@ public class Ball : MonoBehaviour
     {
         rigidbody2D.velocity = new Vector2(0, 0);
         fly = false;
+        IsDead = false;
     }
     void Update()
     {
@@ -93,11 +95,11 @@ public class Ball : MonoBehaviour
         }
         Vector2 viewportPosition = mainCamera.WorldToViewportPoint(transform.position);
 
-        if (viewportPosition.y < 0) //떨어진경우 다시 원점으로 복귀
+        if (viewportPosition.y < 0&&IsDead==false) //떨어진경우 다시 원점으로 복귀
         {
             ballBurstSound.Play();  // 공 터지는 소리
-            
-            SceneLoad();
+            IsDead = true;
+            lg.DelaySceneLoad();
             GameObject ballClone = Instantiate(ballEffectPrefab);
             ballClone.transform.position = this.transform.position;//죽는 위치 공 이펙트 발현
         }
@@ -161,11 +163,7 @@ public class Ball : MonoBehaviour
         rigidbody2D.AddForce(new Vector2(0f, x), ForceMode2D.Force);
     }
 
-    private void SceneLoad()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.name);//Scene reload
-    }
-
+    
     private void GoForward(string dir, GameObject collideObject)
     {
         if (dir == "right")
@@ -290,7 +288,10 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             ballBurstSound.Play();  // 공 터지는 소리
-            SceneLoad();
+            GameObject ballClone = Instantiate(ballEffectPrefab);
+            ballClone.transform.position = this.transform.position;
+            lg.DelaySceneLoad();
+            Destroy(gameObject);
         }
         if (collision.gameObject.CompareTag("RightForwardBlock"))
         {
