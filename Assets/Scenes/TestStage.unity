@@ -2420,6 +2420,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2759829409995139650, guid: 6cb764f02ad4e094cae2b57636b00400, type: 3}
+      propertyPath: lg
+      value: 
+      objectReference: {fileID: 1225982592}
+    - target: {fileID: 2759829409995139650, guid: 6cb764f02ad4e094cae2b57636b00400, type: 3}
       propertyPath: ballSpeed
       value: 7
       objectReference: {fileID: 0}
@@ -3091,6 +3095,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eedd7a2399e79c44382c946890c48148, type: 3}
+--- !u!114 &1225982592 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8269707233242420076, guid: eedd7a2399e79c44382c946890c48148, type: 3}
+  m_PrefabInstance: {fileID: 1225982591}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea20cb4f753e0ca43a514786105bf586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1230090728
 PrefabInstance:
   m_ObjectHideFlags: 0
