@@ -32,9 +32,22 @@ public class Logic : MonoBehaviour
         if(CurrentStarCount==0)
         {
             GameOverScreen.SetActive(true); //메뉴버튼 활성화
-            Time.timeScale=0f; //시간을 멈춰서 일시정지상태로만듬
+            Invoke("Clear",1);
         }
     }
+    private void Clear()
+    {
+        Time.timeScale=0f; //시간을 멈춰서 일시정지상태로만듬
+    }
+    private void SceneLoad()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(gameObject.scene.name);//Scene reload
+    }
+    public void DelaySceneLoad()
+    {
+        Invoke("SceneLoad",1);
+    }
+
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode) //씬이 로드되면 정상시간에 작동
     {
@@ -43,7 +56,7 @@ public class Logic : MonoBehaviour
     void Update()
     {
         
-        Debug.Log("CurrentStarCount : "+CurrentStarCount);
+        //Debug.Log("CurrentStarCount : "+CurrentStarCount);
         GameClear(); 
     }
 
