@@ -26,8 +26,10 @@ public class Ball : MonoBehaviour
     private Animator anime; //애니메이션 
     private bool c_p;//체크포인트 bool
     private bool c_i;//아이템 먹었는지 체크 bool
-    private Camera mainCamera;
-    private string keymemory;
+    private Camera mainCamera;//카메라 range 알기 위해서
+    private string keymemory;//아이템 방향설정
+    private bool Isnormal_Jump = false;
+
 
     //이펙트
     [SerializeField]
@@ -70,7 +72,7 @@ public class Ball : MonoBehaviour
         anime = GetComponent<Animator>();
         mainCamera = Camera.main;
         rigidbody2D.gravityScale = gravity;
-        
+
         
     }
 
@@ -147,12 +149,27 @@ public class Ball : MonoBehaviour
         }
         
     }
-
-    private void Normaljump() //노멀블럭에서의 점프
+    private void Normaljump1() //노멀블럭에서의 점프
     {
         rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
         rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
     }
+    private void Normaljump2() //소멸블럭에서의 점프
+    {
+        if (Isnormal_Jump == false)
+        {
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
+            rigidbody2D.AddForce(new Vector2(0f, normal_jump), ForceMode2D.Force);
+            Isnormal_Jump = true;
+        }
+        SetBoolAfterDelay();
+    }
+    IEnumerator SetBoolAfterDelay()
+    {
+        yield return new WaitForSeconds(0.001f);
+        Isnormal_Jump = false;
+    }
+
     private void UpJump(float x) //상승점프
     {
         rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 0f);
@@ -263,17 +280,18 @@ public class Ball : MonoBehaviour
         
         rigidbody2D.velocity = new Vector2(0, 0);
     }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Normal Block"))
         {
             ballSound.Play();       // 공 튀는 소리
-            Normaljump();
+            Normaljump1();
         }
         if (collision.gameObject.CompareTag("Destroy"))
         {
             destroySound.Play();        // 소멸블럭 부서지는 소리
-            Normaljump();
+            Normaljump2();
             GameObject collideObject = collision.gameObject;
             Destroy(collideObject);
             GameObject destroyClone = Instantiate(destroyEffectPrefab);
