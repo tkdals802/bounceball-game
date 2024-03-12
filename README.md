@@ -2,3 +2,5 @@
 조원 : 차상민, 윤정빈, 정인우
 
 주요코드 : assets/scripts
+
+공의 모든 움직임 코드 : assets/scripts/ball.cs
